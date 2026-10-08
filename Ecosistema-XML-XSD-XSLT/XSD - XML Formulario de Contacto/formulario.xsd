@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="formulario_contacto">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="datos_usuario" type="TipoDatosUsuario"/>
+                <xs:element name="preferencias" type="TipoPreferencias"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="TipoDatosUsuario">
+        <xs:sequence>
+            <xs:element name="nombre_usuario" type="xs:string"/>
+            
+            <xs:element name="correo" type="TipoEmail"/>
+            
+            <xs:element name="contrasena" type="TipoContrasena"/>
+            
+            <xs:element name="fecha_nacimiento" type="xs:date"/>
+            <xs:element name="direccion" type="xs:string"/>
+            
+            <xs:element name="codigo_postal" type="TipoCP"/>
+            
+            <xs:element name="provincia" type="TipoProvincia"/>
+            
+            <xs:element name="telefono" type="TipoTelefono"/>
+            
+            <xs:element name="ciudad" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TipoPreferencias">
+        <xs:sequence>
+            <xs:element name="promociones" type="xs:boolean"/>
+            <xs:element name="newsletter" type="xs:boolean"/>
+            <xs:element name="metodo_pago" type="xs:string" minOccurs="0"/>
+            
+            <xs:element name="comentarios" type="TipoComentario"/>
+            
+            <xs:element name="genero" type="TipoGenero"/>
+            
+            <xs:element name="terminos" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TipoEmail">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@]+@[^\.]+\..+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoContrasena">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="8"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoCP">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoProvincia">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Madrid"/>
+            <xs:enumeration value="Barcelona"/>
+            <xs:enumeration value="Valencia"/>
+            <xs:enumeration value="Sevilla"/>
+            <xs:enumeration value="Otra"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoTelefono">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\+34[0-9]{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoComentario">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="500"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoGenero">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Masculino"/>
+            <xs:enumeration value="Femenino"/>
+            <xs:enumeration value="No decirlo"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

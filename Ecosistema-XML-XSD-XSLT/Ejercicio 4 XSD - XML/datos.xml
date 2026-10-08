@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="reglas.xsd">
+    
+    <producto>
+        <raton>
+            <codigo>R-001</codigo>
+            <nombre>Ratón Gaming</nombre>
+            <descripcion>3200 DPI con luces</descripcion>
+        </raton>
+    </producto>
+
+    <producto>
+        <monitor>
+            <codigo>M-LG-24</codigo>
+        </monitor>
+    </producto>
+
+    <producto>
+        <teclado>
+            <codigo>K-OFFICE</codigo>
+            <nombre>Teclado de oficina</nombre>
+        </teclado>
+    </producto>
+
+</productos>

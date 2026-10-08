@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listaventas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ventas.xsd">
+    
+    <venta>
+        <importe>150.50</importe>
+        <comprador>Empresa A S.L.</comprador>
+        <vendedor>Juan Pérez</vendedor>
+        <fecha>2023-10-25</fecha>
+        <codigo_factura>FAC-2023-001</codigo_factura>
+    </venta>
+
+    <venta>
+        <importe>45.00</importe>
+        <comprador>Cliente Particular</comprador>
+        <vendedor>Ana Gómez</vendedor>
+        <codigo_factura>FAC-2023-002</codigo_factura>
+    </venta>
+
+</listaventas>

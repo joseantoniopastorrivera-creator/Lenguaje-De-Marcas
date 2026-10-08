@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<especie xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="especies.xsd" estado="amenazado">
+    
+    <nombre nombre-cientifico="Monachus monachus">Foca monje</nombre>
+    
+    <familia>Phocidae</familia>
+    
+    <distribucion>
+        <zona>Costa Atlántica</zona>
+        <zona>Costa Mediterránea</zona>
+    </distribucion>
+
+</especie>

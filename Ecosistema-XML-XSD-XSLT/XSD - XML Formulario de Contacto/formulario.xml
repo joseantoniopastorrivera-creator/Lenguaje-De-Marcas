@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulario_contacto xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="formulario.xsd">
+    
+    <datos_usuario>
+        <nombre_usuario>Juan Nadie</nombre_usuario>
+        <correo>ejemplo@gmail.com</correo>
+        <contrasena>PasswordSeguro123</contrasena>
+        <fecha_nacimiento>1990-05-20</fecha_nacimiento>
+        <direccion>Calle Mayor 123</direccion>
+        <codigo_postal>28801</codigo_postal>
+        <provincia>Madrid</provincia>
+        <telefono>+34666777888</telefono>
+        <ciudad>Alcalá de Henares</ciudad>
+    </datos_usuario>
+
+    <preferencias>
+        <promociones>true</promociones>
+        <newsletter>false</newsletter>
+        <metodo_pago>Tarjeta</metodo_pago>
+        <comentarios>Me gustaría recibir información sobre cursos de XML.</comentarios>
+        <genero>Masculino</genero>
+        <terminos>true</terminos>
+    </preferencias>
+
+</formulario_contacto>

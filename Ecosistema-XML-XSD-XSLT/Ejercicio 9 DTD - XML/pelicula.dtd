@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT pelicula (titulo, director, sinopsis, actor+, anio?)>
+
+<!ELEMENT titulo (#PCDATA)>
+<!ELEMENT director (#PCDATA)>
+<!ELEMENT sinopsis (#PCDATA)>
+<!ELEMENT actor (#PCDATA)>
+<!ELEMENT anio (#PCDATA)>

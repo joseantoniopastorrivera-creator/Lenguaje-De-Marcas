@@ -1,0 +1,4 @@
+Realiza un diseño de esquema xml para el formulario de contacto que subo en el fichero a continuación. 
+Observa que debes incluir restricciones en la definición de algunos de los elementos. 
+Para introducir restricciones, utiza el elemento SimplexType cuando definas el tipo del elemento al que debas aplicar la restricción. 
+Las posibles restricciones serán de tipo: enumeration, pattern, length, minLength, maxLength, etc

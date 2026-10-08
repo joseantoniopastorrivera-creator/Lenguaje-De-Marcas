@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pedidos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="pedidos.xsd">
+    
+    <pedido>
+        <empresa>1234</empresa>
+        
+        <productos_solicitados>
+            <producto>Ordenador Portátil</producto>
+            <producto>Ratón inalámbrico</producto>
+        </productos_solicitados>
+        
+        <fecha>2024-02-01</fecha>
+        
+        <factura numfactura="FAC-001" cliente_factura="C-1234">
+            <emisor>PC Componentes S.L.</emisor>
+            <total>850.50</total>
+            <fecha_fact>2024-02-01</fecha_fact>
+        </factura>
+    </pedido>
+
+    <pedido>
+        <cliente NIF="N12345678">
+            <mote>Pepe</mote>
+        </cliente>
+        
+        <productos_solicitados>
+            <producto>Monitor 24 pulgadas</producto>
+        </productos_solicitados>
+        
+        <fecha>2024-02-05</fecha>
+        
+        </pedido>
+
+</pedidos>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT especie (nombre, familia, distribucion)>
+
+<!ATTLIST especie estado (extinto|amenazado|sin-peligro) #REQUIRED>
+
+<!ELEMENT nombre (#PCDATA)>
+<!ATTLIST nombre nombre-cientifico CDATA #REQUIRED>
+
+<!ELEMENT familia (#PCDATA)>
+
+<!ELEMENT distribucion (zona+)>
+<!ELEMENT zona (#PCDATA)>

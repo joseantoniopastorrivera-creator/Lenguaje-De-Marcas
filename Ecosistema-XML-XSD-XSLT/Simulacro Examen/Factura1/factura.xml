@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="factura.xsl"?>
+<factura xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="factura.xsd" n_factura="999">
+    
+    <datos_empresa>
+        <nombre>Equipos Digitales S.L.</nombre>
+        <direccion>Av. Valladolid, Madrid 28015</direccion>
+        <cif>Q-9876543</cif>
+        <telefono>91.777.66.88</telefono>
+        <fax>91.777.66.99</fax>
+    </datos_empresa>
+
+    <datos_factura>
+        <fecha>2005-01-12</fecha>
+        <pedido>731</pedido>
+        <forma_pago>EFECTIVO</forma_pago>
+    </datos_factura>
+
+    <datos_cliente n_cliente="879">
+        <nombre>Darío Bueno Gutiérrez</nombre>
+        <direccion>Av. Oporto nº7 4ºd</direccion>
+        <poblacion>Madrid</poblacion>
+        <cod_postal>28043</cod_postal>
+        <provincia>Madrid</provincia>
+    </datos_cliente>
+
+    <detalle_factura>
+        <linea>
+            <ref>MII93000F/8</ref>
+            <descripcion>MICRO PENTIUM IV 3000MHZ FB800</descripcion>
+            <cantidad>1</cantidad>
+            <precio>230</precio>
+            <igv>16.0</igv>
+            <importe>266.80</importe>
+        </linea>
+        <linea>
+            <ref>MB8QDIP4</ref>
+            <descripcion>PLACA BASE QDI P4</descripcion>
+            <cantidad>1</cantidad>
+            <precio>180</precio>
+            <igv>16.0</igv>
+            <importe>208.80</importe>
+        </linea>
+        <linea>
+            <ref>MEDD512M32</ref>
+            <descripcion>DIMM DDR 512MB 3200</descripcion>
+            <cantidad>2</cantidad>
+            <precio>40</precio>
+            <igv>16.0</igv>
+            <importe>92.80</importe>
+        </linea>
+        <linea>
+            <ref>HD250GSA7</ref>
+            <descripcion>DISCO DURO 250GB S-ATA 7200</descripcion>
+            <cantidad>4</cantidad>
+            <precio>120</precio>
+            <igv>16.0</igv>
+            <importe>556.80</importe>
+        </linea>
+    </detalle_factura>
+
+    <totales>
+        <base_imponible>970.00</base_imponible>
+        <porcentaje_igv>16.0</porcentaje_igv>
+        <cuota_igv>155.20</cuota_igv>
+        <total_factura>1125.20</total_factura>
+    </totales>
+
+</factura>

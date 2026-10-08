@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE videojuego SYSTEM "videojuego.dtd">
+
+<videojuego titulo="Super Mario Odyssey">
+    
+    <titulo>Super Mario Odyssey</titulo>
+    
+    <genero>Plataformas</genero>
+    <genero>Aventura</genero>
+    <genero>Acción</genero>
+
+</videojuego>

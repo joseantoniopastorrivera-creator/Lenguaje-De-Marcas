@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registro_temperaturas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="temperatura.xsd">    
+    <provincia>Teruel</provincia>
+    <fecha_registro>2024-01-15</fecha_registro>
+    
+    <temperatura_minima>-12</temperatura_minima>
+    <temperatura_maxima>8</temperatura_maxima>
+    
+    <incidencias>
+        <incidencia>
+            <nombre>frío</nombre>
+            <severidad>alta</severidad>
+        </incidencia>
+        
+        <incidencia>
+            <nombre>nieve</nombre>
+            <severidad>media</severidad>
+        </incidencia>
+    </incidencias>
+
+</registro_temperaturas>

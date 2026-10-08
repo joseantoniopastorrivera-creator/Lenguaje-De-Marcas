@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT receta (nombre, ingredientes, instrucciones)>
+
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT instrucciones (#PCDATA)>
+
+<!ELEMENT ingredientes (ingrediente+)>
+
+<!ELEMENT ingrediente (#PCDATA)>
+
+<!ATTLIST receta 
+    raciones CDATA #REQUIRED
+    dificultad (baja|media|alta) "media">
+
+<!ATTLIST ingrediente 
+    cantidad CDATA #IMPLIED
+    unidad CDATA #IMPLIED>

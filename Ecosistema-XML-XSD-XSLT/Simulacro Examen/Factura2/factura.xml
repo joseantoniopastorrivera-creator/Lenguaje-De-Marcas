@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="factura.xsl"?>
+<factura xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="factura.xsd" numero="27" fecha="2013-12-18">
+    
+    <datos_emisor>
+        <nombre>Librería Pérez</nombre>
+        <cif>44555666B</cif>
+        <telefono>777888999</telefono>
+    </datos_emisor>
+
+    <datos_cliente>
+        <nombre>Biblioteca Txantrea</nombre>
+        <cif>33111222A</cif>
+        <telefono>333999444</telefono>
+    </datos_cliente>
+
+    <detalle_factura>
+        <linea>
+            <codigo>AW7</codigo>
+            <tipo>Libro</tipo>
+            <descripcion>Analítica Web 2.0</descripcion>
+            <cantidad>1</cantidad>
+            <oferta>SI</oferta>
+            <pvp>25.12</pvp>
+        </linea>
+        <linea>
+            <codigo>CP5</codigo>
+            <tipo>DVD</tipo>
+            <descripcion>Curso de HTML</descripcion>
+            <cantidad>2</cantidad>
+            <oferta>NO</oferta>
+            <pvp>30.5</pvp>
+        </linea>
+    </detalle_factura>
+
+    <importe_total>86.12</importe_total>
+
+</factura>

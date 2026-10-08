@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE listapedidos SYSTEM "reglas.dtd">
+
+<listapedidos>
+    <pedido>
+        <numero_serie>SN-998877</numero_serie>
+        <cantidad>50</cantidad>
+        <peso>10kg</peso>
+    </pedido>
+
+    <pedido>
+        <numero_serie>SN-112233</numero_serie>
+        <cantidad>120</cantidad>
+    </pedido>
+</listapedidos>

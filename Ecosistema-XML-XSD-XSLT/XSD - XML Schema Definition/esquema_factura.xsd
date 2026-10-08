@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="factura">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="datos_empresa" type="DefinicionEmpresa"/>
+                <xs:element name="datos_factura" type="DefinicionDatosFactura"/>
+                <xs:element name="datos_cliente" type="DefinicionCliente"/>
+                <xs:element name="lineas_factura" type="DefinicionListaArticulos"/>
+                <xs:element name="totales" type="DefinicionTotales"/>
+            </xs:sequence>
+            <xs:attribute name="numero" type="xs:integer" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="DefinicionEmpresa">
+        <xs:sequence>
+            <xs:element name="nombre" type="xs:string"/>
+            <xs:element name="direccion" type="xs:string"/>
+            <xs:element name="cif" type="xs:string"/>
+            <xs:element name="telefono" type="xs:string"/>
+            <xs:element name="fax" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DefinicionDatosFactura">
+        <xs:sequence>
+            <xs:element name="fecha" type="xs:date"/>
+            <xs:element name="pedido_ref" type="xs:string"/>
+            <xs:element name="forma_pago">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="EFECTIVO"/>
+                        <xs:enumeration value="TARJETA"/>
+                        <xs:enumeration value="TRANSFERENCIA"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DefinicionCliente">
+        <xs:sequence>
+            <xs:element name="n_cliente" type="xs:integer"/>
+            <xs:element name="nombre" type="xs:string"/>
+            <xs:element name="direccion_envio" type="xs:string"/>
+            <xs:element name="poblacion" type="xs:string"/>
+            <xs:element name="cod_postal" type="xs:string"/>
+            <xs:element name="provincia" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DefinicionListaArticulos">
+        <xs:sequence>
+            <xs:element name="linea" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ref" type="xs:string"/>
+                        <xs:element name="descripcion" type="xs:string"/>
+                        <xs:element name="cantidad" type="xs:integer"/>
+                        <xs:element name="precio" type="FormatoMonedaEstricto"/>
+                        <xs:element name="igv" type="xs:decimal"/>
+                        <xs:element name="importe" type="FormatoMonedaEstricto"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DefinicionTotales">
+        <xs:sequence>
+            <xs:element name="base_imponible" type="FormatoMonedaEstricto"/>
+            <xs:element name="porcentaje_igv" type="xs:decimal"/>
+            <xs:element name="cuota_igv" type="FormatoMonedaEstricto"/>
+            <xs:element name="total_factura">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="FormatoMonedaEstricto">
+                            <xs:attribute name="moneda" type="xs:string" fixed="eur"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="FormatoMonedaEstricto">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

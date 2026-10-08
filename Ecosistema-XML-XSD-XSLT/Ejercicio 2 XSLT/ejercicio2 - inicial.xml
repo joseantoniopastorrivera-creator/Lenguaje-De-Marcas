@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ejercicio2.xsl"?>
+<catalogo>
+    <videojuego id="v1">
+        <titulo>The Legend of Zelda: Breath of the Wild</titulo>
+        <plataforma>Nintendo Switch</plataforma>
+        <anio>2017</anio>
+        <genero>Aventura</genero>
+        <precio>59.99</precio>
+    </videojuego>
+    
+    <videojuego id="v2">
+        <titulo>Minecraft</titulo>
+        <plataforma>Multiplataforma</plataforma>
+        <anio>2011</anio>
+        <genero>Sandbox</genero>
+        <precio>26.95</precio>
+    </videojuego>
+    
+    <videojuego id="v3">
+        <titulo>FIFA 24</titulo>
+        <plataforma>PS5</plataforma>
+        <anio>2023</anio>
+        <genero>Deportes</genero>
+        <precio>69.99</precio>
+    </videojuego>
+</catalogo>

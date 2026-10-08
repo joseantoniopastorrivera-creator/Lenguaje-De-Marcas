@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netflix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="netflix.xsd">
+    
+    <serie nombre="elite" genero="suspense" temporadas="4" anio_inicio="2018" />
+    
+    <serie nombre="stranger things" genero="ficcion" temporadas="3" estado="emision" />
+    
+    <serie nombre="the crown" temporadas="6" />
+
+</netflix>

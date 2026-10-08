@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="reglas.xsd">
+    
+    <raton>
+        <codigo>M-LOG-01</codigo>
+        <descripcion>Ratón ergonómico vertical</descripcion>
+    </raton>
+
+    <teclado>
+        <codigo>K-COR-99</codigo>
+        <descripcion>Teclado Mecánico K70</descripcion>
+    </teclado>
+
+    <raton>
+        <codigo>M-GEN-02</codigo>
+        </raton>
+
+    <teclado>
+        <codigo>K-LOG-MX</codigo>
+        <descripcion>Teclado inalámbrico mini</descripcion>
+        <peso>500g</peso> </teclado>
+
+</productos>

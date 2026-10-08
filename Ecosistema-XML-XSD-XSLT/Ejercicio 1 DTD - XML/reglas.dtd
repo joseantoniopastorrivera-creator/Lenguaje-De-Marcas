@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT productos (raton | teclado)*>
+
+<!ELEMENT raton (codigo, descripcion?)>
+
+<!ELEMENT teclado (codigo, descripcion, peso?)>
+
+<!ELEMENT codigo (#PCDATA)>
+<!ELEMENT descripcion (#PCDATA)>
+<!ELEMENT peso (#PCDATA)>

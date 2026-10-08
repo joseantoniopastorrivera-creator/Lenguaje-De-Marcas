@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listapedidos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="pedidos.xsd">
+    
+    <pedido>
+        <numero_serie>SN-998877</numero_serie>
+        <cantidad>50</cantidad>
+        <peso>10kg</peso>
+    </pedido>
+
+    <pedido>
+        <numero_serie>SN-112233</numero_serie>
+        <cantidad>120</cantidad>
+    </pedido>
+
+</listapedidos>

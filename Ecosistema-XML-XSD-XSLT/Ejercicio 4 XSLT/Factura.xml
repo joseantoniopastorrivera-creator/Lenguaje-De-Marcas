@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="factura.xsl"?>
+<factura xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="factura.xsd">
+    <datos_empresa>
+        <nombre>Equipos Digitales S.L.</nombre>
+        <direccion>
+            <tipo_via>Avenida</tipo_via>
+            <nombre>Valladolid</nombre>
+            <poblacion>Madrid</poblacion>
+            <codigo_postal>28015</codigo_postal>
+            <numero></numero>
+            <piso></piso>
+            <puerta></puerta>
+            <provincia>Madrid</provincia>
+        </direccion>
+        <cif>Q-9876543</cif>
+        <telefono>91.777.66.88</telefono>
+        <fax>91.777.66.99</fax>
+    </datos_empresa>
+
+        <datos_cliente>
+            <numero>879</numero>
+            <nombre>Darío</nombre>
+            <apellidos>Bueno Gutiérrez</apellidos>
+            <direccion>
+                <tipo_via>Av.</tipo_via>
+                <nombre>Oporto</nombre>
+                <numero>7</numero>
+                <piso>4º</piso>
+                <puerta>d</puerta>
+                <poblacion>Madrid</poblacion>
+                <codigo_postal>28043</codigo_postal>
+                <provincia>Madrid</provincia>
+            </direccion>
+        </datos_cliente>
+
+        <detalles_factura>
+            <fecha>
+                <dia>12</dia>
+                <mes>01</mes>
+                <anio>2005</anio>
+            </fecha>
+            <numero_pedido>731</numero_pedido>
+            <metodo_de_pago>EFECTIVO</metodo_de_pago>
+
+            <item>
+                <ref>MII93000F/8</ref>
+                <descripcion>MICRO PENTIUM IV 3000MHZ FB800</descripcion>
+                <cantidad>1</cantidad>
+                <precio_unidad>230</precio_unidad>
+                <igv_porcentaje>16.0</igv_porcentaje>
+                <importe>266.80</importe>
+            </item>
+            <item>
+                <ref>MB8QDIP4</ref>
+                <descripcion>PLACA BASE QDI P4</descripcion>
+                <cantidad>1</cantidad>
+                <precio_unidad>180</precio_unidad>
+                <igv_porcentaje>16.0</igv_porcentaje>
+                <importe>208.80</importe>
+            </item>
+            <item>
+                <ref>MEDD512M32</ref>
+                <descripcion>DIMM DDR 512MB 3200</descripcion>
+                <cantidad>2</cantidad>
+                <precio_unidad>40</precio_unidad>
+                <igv_porcentaje>16.0</igv_porcentaje>
+                <importe>92.80</importe>
+            </item>
+            <item>
+                <ref>HD250GSA7</ref>
+                <descripcion>DISCO DURO 250GB S-ATA 7200</descripcion>
+                <cantidad>4</cantidad>
+                <precio_unidad>120</precio_unidad>
+                <igv_porcentaje>16.0</igv_porcentaje>
+                <importe>556.80</importe>
+            </item>
+
+            <totales>
+                <base_imponible>970.00</base_imponible>
+                <porcentaje_igv>16.0</porcentaje_igv>
+                <cuota_igv>155.20</cuota_igv>
+                <total_factura>1125.20</total_factura>
+            </totales>
+        </detalles_factura>
+    </factura>

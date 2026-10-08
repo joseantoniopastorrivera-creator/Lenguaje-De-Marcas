@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT listapedidos (pedido*)>
+
+<!ELEMENT pedido (numero_serie, cantidad, peso?)>
+
+<!ELEMENT numero_serie (#PCDATA)>
+<!ELEMENT cantidad (#PCDATA)>
+<!ELEMENT peso (#PCDATA)>

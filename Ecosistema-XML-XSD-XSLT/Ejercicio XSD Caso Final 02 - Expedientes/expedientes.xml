@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<expedientes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="expedientes.xsd">
+    
+    <expediente>
+        <titulacion>DAW</titulacion>
+        <estudiante>Ainhoa Garante Lizarraga</estudiante>
+        <modulos>
+            <modulo>
+                <nombre>Sistemas Informáticos</nombre>
+                <aprobado>true</aprobado>
+                <curso>Primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Lenguaje de marcas y sistemas de gestion de la informacion</nombre>
+                <aprobado>true</aprobado>
+                <curso>Primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Programacion</nombre>
+                <aprobado>false</aprobado>
+                <curso>Segundo</curso>
+            </modulo>
+        </modulos>
+    </expediente>
+
+    <expediente>
+        <titulacion>DAM</titulacion>
+        <estudiante>Pedro Pérez</estudiante>
+        <modulos>
+            <modulo>
+                <nombre>Bases de Datos</nombre>
+                <aprobado>true</aprobado>
+                <curso>Primero</curso>
+            </modulo>
+        </modulos>
+    </expediente>
+
+</expedientes>

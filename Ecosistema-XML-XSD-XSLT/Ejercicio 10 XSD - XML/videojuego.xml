@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<videojuego xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="videojuego.xsd" titulo="Super Mario Odyssey">
+    
+    <titulo>Super Mario Odyssey</titulo>
+    
+    <genero>Plataformas</genero>
+    <genero>Aventura</genero>
+    <genero>Acción</genero>
+
+</videojuego>

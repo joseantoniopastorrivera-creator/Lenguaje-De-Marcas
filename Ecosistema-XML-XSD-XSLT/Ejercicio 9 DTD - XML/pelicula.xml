@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pelicula SYSTEM "pelicula.dtd">
+
+<pelicula>
+    <titulo>El Señor de los Anillos: La Comunidad del Anillo</titulo>
+    <director>Peter Jackson</director>
+    <sinopsis>Un hobbit de la Comarca hereda un anillo mágico...</sinopsis>
+    
+    <actor>Elijah Wood</actor>
+    <actor>Ian McKellen</actor>
+    <actor>Viggo Mortensen</actor>
+
+    <anio>2001</anio>
+</pelicula>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="personal.xsl"?>
+<registro_personal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="personal.xsd" fecha="2013-10-20">
+    
+    <datos_generales>
+        <empresa>Navarra 4 Internet</empresa>
+        <trabajadores>6</trabajadores>
+        <multinacional>NO</multinacional>
+        <moneda>Euro</moneda>
+        <sector>Tecnología</sector>
+    </datos_generales>
+
+    <departamentos>
+        
+        <departamento codigo="ADMIN">
+            <nombre_dept>Administración</nombre_dept>
+            
+            <empleado>
+                <nombre>Ana Sanz Ruiz</nombre>
+                <rol>Jefe</rol>
+                <baja>NO</baja>
+                <salario>4700.58</salario>
+                <usuario>anasan</usuario>
+                <clave>3%abZKi6</clave>
+            </empleado>
+            
+            <empleado>
+                <nombre>Juan Gil Rus</nombre>
+                <rol>Empleado</rol>
+                <baja>SI</baja>
+                <salario>2200.58</salario>
+            </empleado>
+            
+            <empleado>
+                <nombre>Lucas López Tapia</nombre>
+                <rol>Empleado</rol>
+                <baja>NO</baja>
+                <salario>2215.65</salario>
+            </empleado>
+        </departamento>
+
+        <departamento codigo="INFOR">
+            <nombre_dept>Informática</nombre_dept>
+            
+            <empleado>
+                <nombre>Isabel Gómez Pérez</nombre>
+                <rol>Jefe</rol>
+                <baja>SI</baja>
+                <salario>5200.77</salario>
+                <usuario>isabelgo</usuario>
+                <clave>8$abcdHj</clave>
+            </empleado>
+            
+            <empleado>
+                <nombre>Oscar Lee Blesa</nombre>
+                <rol>Empleado</rol>
+                <baja>NO</baja>
+                <salario>3109.26</salario>
+            </empleado>
+        </departamento>
+
+        <departamento codigo="MARKE">
+            <nombre_dept>Marketing</nombre_dept>
+            
+            <empleado>
+                <nombre>Luis Mar Herreros</nombre>
+                <rol>Jefe</rol>
+                <baja>NO</baja>
+                <salario>5111.09</salario>
+                <usuario>invitado</usuario>
+                <clave>2$xlzY#@</clave>
+            </empleado>
+        </departamento>
+
+    </departamentos>
+</registro_personal>

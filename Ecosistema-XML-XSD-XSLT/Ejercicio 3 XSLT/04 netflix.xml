@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/xsl" href="netflix.xsl"?>
+
+<netflix>
+
+  <serie nombre="elite"
+         genero="suspense"
+         temporadas="4"
+         anio_inicio="2018"
+         estado="finalizada"/>
+
+  <serie nombre="stranger things"
+         genero="ficcion"
+         temporadas="3"
+         estado="emision"/>
+
+  <serie nombre="la que se avecina"
+         genero="comedia"
+         temporadas="13"
+         anio_inicio="2007"/>
+
+  <serie nombre="documentales varios"
+         genero="variado"
+         temporadas="1"/>
+
+</netflix>

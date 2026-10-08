@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<billete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="billete.xsd">
+    <pasajero>Alfredo Pujol</pasajero>
+    <origen>Josep Tarradellas - Barcelona - El Prat</origen>
+    <destino>Madrid - Barajas - Adolfo Suárez</destino>
+    <fecha>2023-09-03</fecha>
+    <hora>14:20:00</hora>
+</billete>

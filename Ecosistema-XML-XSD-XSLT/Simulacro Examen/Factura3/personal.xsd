@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="registro_personal">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="datos_generales">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="empresa" type="xs:string"/>
+                            <xs:element name="trabajadores" type="xs:integer"/>
+                            <xs:element name="multinacional" type="TipoSiNo"/>
+                            <xs:element name="moneda" type="xs:string"/>
+                            <xs:element name="sector" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="departamentos">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="departamento" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nombre_dept" type="xs:string"/>
+                                        <xs:element name="empleado" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="nombre" type="xs:string"/>
+                                                    <xs:element name="rol" type="xs:string"/>
+                                                    <xs:element name="baja" type="TipoSiNo"/>
+                                                    <xs:element name="salario" type="xs:decimal"/>
+                                                    <xs:element name="usuario" type="xs:string" minOccurs="0"/>
+                                                    <xs:element name="clave" type="xs:string" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="codigo" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="fecha" type="xs:date" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="TipoSiNo">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SI"/>
+            <xs:enumeration value="NO"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

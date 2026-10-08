@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE receta SYSTEM "receta.dtd">
+
+<receta raciones="4">
+    <nombre>Tortilla de Patatas Española</nombre>
+    
+    <ingredientes>
+        <ingrediente cantidad="4" unidad="unidades">Huevos L</ingrediente>
+        
+        <ingrediente cantidad="1" unidad="kg">Patatas gallegas</ingrediente>
+        
+        <ingrediente>Aceite de oliva virgen extra</ingrediente>
+        <ingrediente>Sal</ingrediente>
+    </ingredientes>
+    
+    <instrucciones>
+        Pelar y cortar las patatas. Freírlas en abundante aceite. 
+        Batir los huevos. Mezclar todo y cuajar en la sartén al gusto.
+    </instrucciones>
+</receta>

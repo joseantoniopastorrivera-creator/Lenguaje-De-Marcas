@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pedido xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="pedido.xsd">
+    <cliente>Gabriela Romero</cliente>
+    <direccion>C/Area del Triunfo, Granada</direccion>
+    <items>
+        <item numero="4">
+            <nombre>Hamburguesa de bacon y queso</nombre>
+            <precio>28</precio>
+        </item>
+        <item numero="3">
+            <nombre>Refresco de naranja sin azúcar</nombre>
+            <precio>9</precio>
+        </item>
+    </items>
+</pedido>
