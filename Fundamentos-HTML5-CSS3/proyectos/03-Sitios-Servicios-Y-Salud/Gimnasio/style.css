@@ -1,0 +1,216 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+/* --- ESTILOS GENERALES --- */
+
+.enfasis {
+    font-style: italic;
+    font-weight: 900;
+    color: #cc0000;   /* Rojo Gym */
+    text-transform: uppercase;
+}
+
+.fondo_negro {
+    color: white;
+    background-color: black;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+/* --- HEADER --- */
+
+header {
+    color: white;
+    background-color: #111;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 4px solid #cc0000;
+}
+
+header > nav ul {
+    display: flex;
+}
+
+header > nav ul li {
+    margin-right: 20px;
+    list-style: none;
+}
+
+header > nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+header > nav ul li a:hover {
+    color: #cc0000;
+}
+
+/* --- TABLAS (Estilos globales) --- */
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #cc0000;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+tr:nth-child(odd) { background-color: #ffffff; }
+tr:nth-child(even) { background-color: #f2f2f2; }
+
+tr:hover {
+    background-color: #ffcccc;
+    font-weight: bold;
+}
+
+/* --- MAIN Y HERO (Corregido el anidamiento) --- */
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+#hero {
+    width: 100%;
+    min-height: 30vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Selectores separados para mayor compatibilidad */
+#hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+#hero p {
+    color: #444;
+    width: 60%;
+    text-align: center;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+.imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.imagen img {
+    border-radius: 10px;
+    width: 50%;
+    max-width: 600px;
+    height: auto;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+}
+
+/* --- FOOTER --- */
+
+footer {
+    width: 100%;
+    height: auto;
+    min-height: 60px;
+    background-color: #111;
+    color: #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-size: 0.9em;
+    border-top: 4px solid #cc0000;
+}
+
+footer a {
+    color: #cc0000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* --- MEDIA QUERY (Móviles) --- */
+
+@media (max-width: 600px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    header > nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header > nav ul li {
+        margin-right: 0;
+    }
+
+    /* Ajustamos los selectores corregidos */
+    #hero p {
+        width: 90%;
+    }
+
+    .imagen img {
+        width: 90%;
+    }
+    
+    table {
+        font-size: 0.8em;
+        width: 100%;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        font-size: 0.7em;
+    }
+}

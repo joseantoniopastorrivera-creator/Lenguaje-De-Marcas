@@ -1,0 +1,197 @@
+/* RESETEO BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    color: #333;
+}
+
+main {
+    flex: 1;
+    padding: 30px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* HEADER Y NAV */
+header {
+    background-color: #000;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 30px;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding-bottom: 5px;
+}
+
+nav a:hover, nav a.activo {
+    color: white;
+    border-bottom: 2px solid #2ecc71; /* Un toque sutil de tu verde */
+}
+
+/* --- REJILLA 3x3 (GRID) --- */
+.galeria-tienda {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.producto {
+    position: relative; /* Para poder posicionar la etiqueta de stock encima */
+    border: 1px solid #eee;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+}
+
+.producto img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Cuadrado perfecto */
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.producto h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.precio {
+    font-weight: bold;
+    color: #555;
+}
+
+/* --- TUS COLORES (Etiquetas de Stock) --- */
+.stock-badge {
+    display: block;
+    margin-top: 10px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+.disponible {
+    background-color: #2ecc71; /* TU VERDE: AVAILABLE */
+}
+
+.agotado {
+    background-color: #c0392b; /* TU ROJO: OUT OF STOCK */
+    text-decoration: line-through; /* Tachado para dar más drama */
+}
+/* ---------------------------------------- */
+
+/* MULTIMEDIA Y FORMULARIOS */
+.media-container, form {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+form {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    background-color: #000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover {
+    background-color: #333;
+}
+
+/* FOOTER (Copiado de tu examen) */
+footer {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+    margin-top: auto;
+    font-size: 0.9em;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+    .galeria-tienda {
+        grid-template-columns: repeat(1, 1fr); /* 1 columna en móvil */
+    }
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}

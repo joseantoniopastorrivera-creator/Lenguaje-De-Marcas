@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub | Media</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>TechHub <span>_Alcalá</span></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">/dashboard</a></li>
+                <li><a href="multimedia.html" class="activo">/media</a></li>
+                <li><a href="registro.html">/join</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Workspace_Tour.mp4</h2>
+        <div class="media-container">
+            <video controls width="100%">
+                <source src="tour_techhub.mp4" type="video/mp4">
+                Error: Codec not supported.
+            </video>
+        </div>
+
+        <h2>Podcast: "Startups de Henares"</h2>
+        <div class="media-container">
+            <p style="margin-bottom:10px; color:#888;">> Playing: Ep. 42 - AI & Ethics</p>
+            <audio controls style="width: 100%;">
+                <source src="podcast_ep42.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <h2>/var/www/images</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
+            <img src="setup_coding.png" alt="Setup Doble Monitor">
+            <img src="sala_reunion.png" alt="Sala Juntas Proyector">
+        </div>
+    </main>
+
+    <footer>
+        <p>System v.2.0.4</p>
+        <p>Network: <span style="color:#2ecc71">● Online</span></p>
+    </footer>
+
+</body>
+</html>

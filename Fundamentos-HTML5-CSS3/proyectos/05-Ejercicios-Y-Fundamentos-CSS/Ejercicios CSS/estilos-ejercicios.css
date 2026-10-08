@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h2 {
+    color: #333;
+    margin-top: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+/* EJERCICIO 1: Circulo */
+.ejercicio-1-circulo {
+    width: 250px;
+    height: 250px;
+    background-color: blue;
+    border: 5px double orange;
+    border-radius: 50%;
+}
+
+/* EJERCICIO 2: Parrafo */
+.ejercicio-2-parrafo {
+    margin: 20px;
+    padding: 14px;
+    border: 2px solid darkgray;
+    border-radius: 10px;
+    background-color: white;
+}
+
+/* EJERCICIO 3: Boton */
+.ejercicio-3-boton {
+    background-color: red;
+    color: white;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.ejercicio-3-boton:hover {
+    background-color: green;
+}
+
+/* EJERCICIO 4: Lista */
+.ejercicio-4-lista {
+    color: blue;
+    list-style-type: upper-roman;
+}
+
+.ejercicio-4-lista li {
+    margin: 10px 0;
+}
+
+/* EJERCICIO 5: Tabla */
+.ejercicio-5-tabla {
+    border-collapse: collapse;
+    width: 300px;
+    background-color: white;
+}
+
+.ejercicio-5-tabla td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* EJERCICIO 6: Imagen */
+.ejercicio-6-imagen {
+    border: 3px solid darkblue;
+    margin: 20px;
+    border-radius: 5px;
+    max-width: 300px;
+}
+
+/* EJERCICIO 7: Tarjeta */
+.ejercicio-7-tarjeta {
+    background-color: lightgray;
+    width: 300px;
+    height: 150px;
+    border: 2px solid black;
+    /* Centrado Flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* EJERCICIO 8: Menu */
+.ejercicio-8-menu a {
+    background-color: lightblue;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.ejercicio-8-menu a:hover {
+    background-color: darkblue;
+}

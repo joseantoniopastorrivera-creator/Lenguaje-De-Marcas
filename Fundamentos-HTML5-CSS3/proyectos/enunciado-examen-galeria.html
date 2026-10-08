@@ -1,0 +1,82 @@
+<!DOCTYPE html> <html lang="es"> <head>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Galería de tarjetas</title> <style>
+        /* --- ESTILOS CSS (La decoración) --- */
+
+        body {
+            font-family: sans-serif; /* Tipo de letra más moderna/limpia */
+            background-color: #f4f4f4; /* Fondo gris suave para que destaquen las tarjetas blancas */
+            margin: 0; /* Quita los márgenes por defecto del navegador */
+            padding: 20px; /* Un poco de espacio interior para no pegar todo al borde */
+        }
+
+        /* 📦 EL CONTENEDOR (La "Mesa") */
+        .contenedor {
+            display: flex; /* ¡MAGIA! [cite_start]Pone los hijos (tarjetas) uno al lado del otro [cite: 1704] */
+            flex-wrap: wrap; [cite_start]/* IMPORTANTE: Si no caben (móvil), que bajen a la siguiente línea [cite: 1841] */
+            gap: 20px; /* Espacio de separación entre las tarjetas */
+            justify-content: center; /* Centra las tarjetas en medio de la pantalla */
+        }
+
+        /* 🃏 LA TARJETA (El "Papel") */
+        .tarjeta {
+            background-color: white; /* Fondo blanco (Requisito 5) */
+            border-radius: 15px; /* Bordes redondeados (Requisito 5) */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra suave (Requisito 5) */
+            width: 300px; /* Ancho fijo para cada tarjeta */
+            padding: 20px; [cite_start]/* Espacio interno para que el texto no toque los bordes [cite: 1494] */
+            text-align: center; /* Centra todo el texto e imágenes dentro de la tarjeta */
+            
+            /* Esto es un extra para que quede bonito al pasar el ratón */
+            transition: transform 0.3s; 
+        }
+
+        /* 🖼️ LA IMAGEN */
+        .tarjeta img {
+            width: 150px; /* Ancho de la foto */
+            height: 150px; /* Alto de la foto (tiene que ser igual al ancho para ser círculo) */
+            object-fit: cover; /* Evita que la foto se deforme o estire */
+            border-radius: 50%; /* ¡TRUCO! Al poner 50%, la caja cuadrada se vuelve un círculo perfecto (Requisito 5) */
+            margin-bottom: 15px; /* Espacio debajo de la foto */
+        }
+
+        /* 🔘 EL BOTÓN */
+        .boton {
+            background-color: #007bff; /* Color de fondo azul */
+            color: white; /* Color del texto */
+            border: none; /* Quitamos el borde feo por defecto */
+            padding: 10px 20px; /* Relleno para hacerlo más gordito */
+            border-radius: 5px; /* Bordes un poco redondeados */
+            cursor: pointer; /* Cambia el cursor a una manita al pasar por encima */
+            font-size: 16px; /* Tamaño de letra */
+        }
+
+        /* INTERACCIÓN DEL BOTÓN (Requisito 5) */
+        .boton:hover {
+            background-color: #0056b3; [cite_start]/* Cambia a un azul más oscuro al pasar el ratón [cite: 1649] */
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">Nuestros Productos</h1>
+
+    <div class="contenedor">
+        
+        <div class="tarjeta">
+            <img src="https://via.placeholder.com/150" alt="Foto Producto 1">
+            <h3>Producto A</h3>
+            <p>Descripción increíble de este producto que tienes que comprar.</p>
+            <button class="boton">Ver más</button>
+        </div>
+
+        <div class="tarjeta">
+            <img src="https://via.placeholder.com/150" alt="Foto Producto 2">
+            <h3>Producto B</h3>
+            <p>Otra descripción genial para este segundo ítem de la lista.</p>
+            <button class="boton">Comprar</button>
+        </div>
+
+    </div> </body>
+</html

@@ -1,0 +1,183 @@
+/* RESETEO BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ESTRUCTURA PRINCIPAL (Sticky Footer) */
+body {
+    font-family: Arial, sans-serif; /* */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Esto empuja el footer hacia abajo */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* HEADER Y NAV */
+header {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+h1 {
+    color: white; /* */
+}
+
+nav ul {
+    display: flex; /* */
+    list-style: none;
+    gap: 20px; /* Separación 20px */
+}
+
+nav a {
+    color: white; /* */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px;
+}
+
+nav a:hover {
+    color: yellow; /* */
+}
+
+/* ESTILOS DE LA TABLA (INDEX) */
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+caption {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333; 
+}
+
+th, td {
+    border: 1px solid #ccc; 
+    padding: 10px;
+    text-align: center;
+    color: white; 
+}
+
+/* Encabezados de tabla */
+thead th {
+    background-color: #555; /* Gris para encabezado */
+    color: white; /* */
+}
+
+/* Columna de los días (Primera columna) */
+tbody td:first-child {
+    background-color: #555;
+    font-weight: bold;
+}
+
+/* Clases para estados */
+.libre {
+    background-color: #2ecc71; /* Verde */
+}
+
+.completo {
+    background-color: #e74c3c; /* Rojo */
+}
+
+.libre-dia {
+    background-color: #2ecc71;
+}
+
+/* Pie de tabla */
+tfoot td {
+    color: black; /* Texto negro */
+    font-style: italic; /* Cursiva */
+    background-color: transparent;
+    border: none;
+    text-align: right;
+    padding-top: 10px;
+}
+
+/* ESTILOS DE MULTIMEDIA Y FORMULARIO */
+video {
+    width: 400px;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, select {
+    padding: 8px;
+    margin-top: 5px;
+}
+
+/* FOOTER */
+footer {
+    width: 100%;
+    height: 60px;
+    background-color: black;/**/
+    color: white;/**/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;/**/
+    padding: 20px;/**/
+    font-size:1em;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: grey;
+}
+
+/* MEDIA QUERY (MÓVIL) */
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column; /* Navegador vertical */
+        align-items: center;
+        overflow-x: hidden;/* Sin scroll horizontal */
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer {
+        font-size: 0.6em;
+    }
+    
+    table, video, form {
+        width: 100%; /* Ancho 100% */
+    }
+    
+    /* Ajuste para que la tabla no se rompa en pantallas muy pequeñas */
+    table {
+        font-size: 0.9em;
+    }
+}

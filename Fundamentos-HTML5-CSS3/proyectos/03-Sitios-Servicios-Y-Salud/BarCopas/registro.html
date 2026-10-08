@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest List | The Midnight Lounge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>The Midnight Lounge</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Reservas</a></li>
+                <li><a href="multimedia.html">Ambiente</a></li>
+                <li><a href="registro.html">Guest List</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Únete a nuestra Guest List</h2>
+
+        <form action="http://www.google.com">
+
+            <label for="nombre">* Nombre y Apellidos:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+
+            <label for="email">* Email corporativo:</label>
+            <input type="email" id="email" name="email" required placeholder="vip@empresa.com">
+
+            <label for="fecha">* Fecha de nacimiento (+18):</label>
+            <input type="date" id="fecha" name="fecha" max="2006-01-01" required>
+
+            <label for="bebida">Bebida de preferencia:</label>
+            <select id="bebida" name="bebida">
+                <option value="gin">Gin Tonic Premium</option>
+                <option value="whisky">Whisky de Malta</option>
+                <option value="cocktail">Cócteles de Autor</option>
+                <option value="champagne">Champagne</option>
+                <option value="vino">Vino Gran Reserva</option>
+            </select>
+
+            <p style="color:#d4af37; margin-top:10px">¿Deseas reservar botella?</p>
+            <div>
+                <input type="radio" id="si" name="botella" value="si">
+                <label for="si">Sí</label>
+                <input type="radio" id="no" name="botella" value="no" checked>
+                <label for="no">No</label>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <input type="checkbox" id="terms" name="terminos" required>
+                <label for="terms">* Confirmo que soy mayor de edad</label>
+            </div>
+
+            <input type="submit" value="Solicitar Acceso" style="background-color:#d4af37; color:black; font-weight:bold; cursor:pointer;">
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; The Midnight Lounge 2026</p>
+        <a href="#">Normas de etiqueta</a>
+    </footer>
+
+</body>
+</html>

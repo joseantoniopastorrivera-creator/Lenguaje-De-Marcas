@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | Gimnasio Hércules</title>
+    <link rel="icon" href="favicon.png">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ESTILOS ESPECÍFICOS DEL FORMULARIO */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        header {
+            color: white;
+            background-color: black;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 3px solid #cc0000; /* Línea roja gym */
+        }
+
+        header > nav ul { display: flex; }
+        header > nav ul li { margin-right: 20px; list-style: none; }
+        
+        header > nav ul li a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        /* Hover en Rojo Gym */
+        header > nav ul li a:hover { color: #cc0000; }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+            background-color: #f9f9f9;
+        }
+
+        main > h2 {
+            text-transform: uppercase;
+            color: #333;
+            font-size: 1.8em;
+        }
+
+        /* DISEÑO DEL FORMULARIO */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 320px;
+            gap: 15px;
+            padding: 25px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        /* Botón de enviar estilo Gym */
+        input[type="submit"] {
+            background-color: black;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #cc0000; /* Rojo al pasar el ratón */
+        }
+
+        .asistencia, .preferencias, .privacidad {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 5px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 4px;
+        }
+        
+        .opcion-radio, .opcion-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        footer {
+            width: 100%;
+            height: 60px;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            font-size: 0.8em;
+            border-top: 3px solid #cc0000;
+        }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { color: #cc0000; }
+
+        /* Media query para móviles */
+        @media (max-width: 600px) {
+            body{ overflow-y: auto; }
+            header { flex-direction: column; gap: 10px; }
+            nav ul { flex-direction: column; gap: 5px; }
+            form { width: 90%; }
+            footer { font-size: 0.6em; flex-direction: column; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" style="color: white; text-decoration: none;">
+            <h1>Gimnasio Hércules</h1>
+        </a>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="multimedia.html">Multimedia</a></li>
+                <li><a href="programa.html">Programa</a></li>
+                <li><a href="registro.html" style="color:#cc0000;">Registro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Inscripción de Socios</h2>
+        
+        <form action="#">
+            <label for="nombre">* Nombre Completo</label>
+            <input type="text" id="nombre" required placeholder="Ej: Juan Pérez">
+
+            <label for="email">* Correo Electrónico</label>
+            <input type="email" id="email" required placeholder="tu@email.com">
+
+            <label for="date">* Fecha de nacimiento</label>
+            <input type="date" id="date" required>
+
+            <label for="actividad">Actividad de Interés</label>
+            <select name="actividad-favorita" id="actividad">
+                <option value="musculacion">Musculación / Pesas</option>
+                <option value="crossfit">Crossfit</option>
+                <option value="zumba">Zumba / Baile</option>
+                <option value="pilates">Pilates / Yoga</option>
+            </select>
+
+            <div class="asistencia">
+                <label>¿Tienes experiencia entrenando?</label>
+                <div class="opcion-radio">
+                    <input type="radio" id="si" name="experiencia" value="si">
+                    <label for="si">Sí, he entrenado antes</label>
+                </div>
+                <div class="opcion-radio">
+                    <input type="radio" id="no" name="experiencia" value="no" checked>
+                    <label for="no">No, soy principiante</label>    
+                </div>
+            </div>
+
+            <div class="preferencias">
+                <label>Intereses extra:</label>
+                <div class="opcion-check">
+                    <input type="checkbox" id="rutina">
+                    <label for="rutina">Solicitar rutina inicial</label>
+                </div>
+                <div class="opcion-check">
+                    <input type="checkbox" id="promo">
+                    <label for="promo">Ofertas de suplementos</label>
+                </div>
+            </div>
+
+            <div class="privacidad">
+                <div class="opcion-check">
+                    <input type="checkbox" required id="terms">
+                    <label for="terms">* Acepto las normas del gimnasio</label>
+                </div>
+            </div>
+
+            <input type="submit" value="ENVIAR INSCRIPCIÓN">
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; Gimnasio Hércules 2025</p>
+        <p>Asignatura Lenguaje de Marcas - IES Isidra de Guzman (Alcalá de Henares)</p>
+        <div class="contacto">
+            <a href="mailto:info@gymhercules.com">info@gymhercules.com</a>
+        </div>
+    </footer>
+</body>
+</html>

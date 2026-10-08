@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alta Paciente | Clínica Vitalidad</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Clínica Vitalidad</h1>
+            <p>Fisioterapia Avanzada & Medicina Deportiva</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Citas Online</a></li>
+                <li><a href="multimedia.html">Recursos y Guías</a></li>
+                <li><a href="registro.html" class="activo">Pacientes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Apertura de Historial Clínico</h2>
+
+        <form action="http://www.google.com">
+            
+            <div class="form-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Tal como aparece en su DNI">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_nac">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha_nac" name="fecha_nac" min="1930-01-01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="motivo">Motivo de la consulta:</label>
+                <select id="motivo" name="motivo">
+                    <option value="contractura">Contractura Muscular</option>
+                    <option value="esguince">Esguince / Lesión Deportiva</option>
+                    <option value="postoperatorio">Rehabilitación Post-operatoria</option>
+                    <option value="revision">Revisión Periódica</option>
+                    <option value="otro">Otros</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>¿Es su primera visita?</label>
+                <div>
+                    <input type="radio" id="si" name="primera_vez" value="si" checked> <label for="si" style="display:inline; font-weight:normal;">Sí</label>
+                    <input type="radio" id="no" name="primera_vez" value="no"> <label for="no" style="display:inline; font-weight:normal;">No (Ya tengo expediente)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="rgpd" required> He leído y acepto la Política de Privacidad de Datos Sanitarios.
+                </label>
+            </div>
+
+            <input type="submit" value="Enviar Datos y Solicitar Cita">
+        </form>
+    </main>
+
+    <footer>
+        <p>Clínica Vitalidad VALERIA - Registro Sanitario C-28001</p>
+    </footer>
+
+</body>
+</html>

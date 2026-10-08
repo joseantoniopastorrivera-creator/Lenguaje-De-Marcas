@@ -1,0 +1,89 @@
+/* Reinicio básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* [cite: 20, 21] Centrado y altura mínima del 100% */
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* [cite: 17] Fondo degradado linear-gradient con dos colores (Azul a Verde según imagen) */
+    background: linear-gradient(to right, #005aa7, #00c6ff); 
+}
+
+/* [cite: 8] Estilos del bloque calculadora */
+.calculadora {
+    /* [cite: 19] Display Grid */
+    display: grid;
+    
+    /*  4 columnas de 100px */
+    grid-template-columns: repeat(4, 100px);
+    
+    /*  5 filas de botones de 100px (el display va aparte o auto) */
+    /* La primera fila es el display (auto o fija) y luego 5 de 100px */
+    grid-template-rows: 120px repeat(5, 100px); 
+    
+    box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Sombra estética opcional */
+}
+
+/* [cite: 5, 33] Estilos del Display (Pantalla) */
+.display {
+    /*  Grid-column: 1/-1 (Expande desde la 1ª a la última) */
+    grid-column: 1 / -1;
+    
+    /* [cite: 36] Color de fondo negro */
+    background-color: black;
+    
+    /* [cite: 34] Color de la letra */
+    color: rgba(250, 250, 250, 0.8);
+    
+    font-size: 2em;
+    padding: 20px;
+    
+    /* [cite: 38, 39, 40] Propiedades Flexbox requeridas */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;     /* Alinea a la derecha */
+    justify-content: space-around; /* Distribuye espacio verticalmente */
+    
+    /* [cite: 41, 43] Romper palabras largas */
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/* [cite: 6] Estilos Generales de los Botones */
+button {
+    /*  Fondo en color rgba */
+    background-color: rgba(250, 250, 250, 0.70);
+    
+    /* [cite: 26] Borde de 1px en blanco */
+    border: 1px solid white;
+    
+    /* [cite: 27] Transición de 0.5s */
+    transition: 0.5s;
+    
+    /* [cite: 29] Cursor: pointer */
+    cursor: pointer;
+    
+    font-size: 1.5em; /* Tamaño de letra para que se vea bien */
+}
+
+/* [cite: 30] Hover en botones */
+button:hover {
+    /*  Color del fondo al pasar el ratón */
+    background-color: rgba(196, 178, 14, 0.9);
+    
+    /* [cite: 31] Color de la letra blanco */
+    color: white;
+}
+
+/* [cite: 12] Clase para botones dobles (AC y =) */
+.boton_doble {
+    grid-column: span 2; /* Ocupa 2 columnas */
+}

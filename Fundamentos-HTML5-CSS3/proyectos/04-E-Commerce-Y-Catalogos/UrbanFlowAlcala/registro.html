@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos | Urban Flow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Urban Flow Alcalá</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Colección</a></li>
+                <li><a href="multimedia.html">Runway</a></li>
+                <li><a href="registro.html" class="activo">Pedidos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Realizar Pedido Online</h2>
+
+        <form action="http://www.google.com">
+            
+            <label for="nombre">* Nombre y Apellidos:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Cliente">
+
+            <label for="direccion">* Dirección de Envío (Alcalá):</label>
+            <input type="text" id="direccion" name="direccion" required>
+
+            <label for="email">* Email de confirmación:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="prenda">Selecciona Prenda:</label>
+            <select id="prenda" name="prenda">
+                <option>Basic Tee White</option>
+                <option>Jeans Slim Black</option>
+                <option>Urban Sneakers</option>
+                <option>Gorra NY Style</option>
+            </select>
+
+            <label for="talla">Talla:</label>
+            <select id="talla" name="talla">
+                <option>XS</option>
+                <option>S</option>
+                <option selected>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div style="margin-top: 20px;">
+                <label>Envío:</label>
+                <input type="radio" id="std" name="envio" value="standard" checked> <label for="std" style="display:inline; font-weight:normal;">Estándar (3-5 días)</label><br>
+                <input type="radio" id="exp" name="envio" value="express"> <label for="exp" style="display:inline; font-weight:normal;">Express 24h (+5€)</label>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <input type="checkbox" name="newsletter" checked>
+                <label style="display:inline; font-weight:normal;">Quiero recibir ofertas de moda.</label>
+            </div>
+
+            <div style="margin-top: 10px;">
+                <input type="checkbox" name="terms" required>
+                <label style="display:inline; font-weight:normal;">* Acepto condiciones de venta.</label>
+            </div>
+
+            <input type="submit" value="Confirmar Compra">
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; Examen de Recuperación</p>
+        <p>Asignatura Lenguaje de Marcas - IES Isidra de Guzman (Alcalá de Henares)</p>
+        <div class="contacto">
+            <a href="mailto:ies.isidra.guzman@correo.com">ies.isidra.guzman@correo.com</a> | 
+            <a href="#">Alcalá de Henares</a>
+        </div>
+    </footer>
+
+</body>
+</html>

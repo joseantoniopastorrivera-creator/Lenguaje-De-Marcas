@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* --- ESTILOS DE LA REJILLA (GRID) --- */
+.galeria-productos {
+    /* Activamos el modo Grid */
+    display: grid;
+    
+    /* DEFINICIÓN DE COLUMNAS:
+       repeat(3, 1fr) significa: "Crea 3 columnas y reparte el espacio (1 fracción) equitativamente".
+       Es lo mismo que poner: 1fr 1fr 1fr */
+    grid-template-columns: repeat(3, 1fr);
+    
+    /* GAP: Es el hueco entre las cajas (como los pasillos de la imagen) */
+    gap: 20px;
+    
+    /* Limitamos el ancho para que no se vea gigante en pantallas grandes */
+    max-width: 800px;
+    margin: 0 auto; /* Centrar la galería en la página */
+}
+
+/* --- ESTILOS DE LAS IMÁGENES (LAS CAJAS) --- */
+.galeria-productos img {
+    width: 100%;        /* Que ocupe todo el ancho de su celda */
+    
+    /* TRUCO PARA HACERLAS CUADRADAS COMO EN TU DIBUJO: */
+    aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada perfecta */
+    object-fit: cover;   /* Recorta la imagen para que no se deforme si no es cuadrada */
+    
+    /* Estilos decorativos tipo "Store" */
+    border: 1px solid #ccc;
+    background-color: white; /* Por si la imagen tarda en cargar */
+    padding: 5px;            /* Un pequeño marco blanco como polaroid */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra suave */
+    transition: transform 0.3s ease;
+}
+
+/* Efecto al pasar el ratón (opcional, queda muy profesional) */
+.galeria-productos img:hover {
+    transform: scale(1.05); /* Hace un pequeño zoom */
+    border-color: #333;
+}

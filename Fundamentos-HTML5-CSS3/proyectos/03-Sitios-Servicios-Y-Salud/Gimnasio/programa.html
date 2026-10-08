@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa | Gimnasio Hércules</title>
+    <link rel="icon" href="favicon.png">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+    /* ESTILOS ESPECÍFICOS DE LA TABLA (ADAPTADOS AL GIMNASIO) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+    }
+
+    header {
+        color: white;
+        background-color: black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 3px solid #cc0000; /* Línea roja gym */
+    }
+
+    header > nav ul { display: flex; }
+    header > nav ul li { margin-right: 20px; list-style: none; }
+    
+    header > nav ul li a { 
+        color: white; 
+        text-decoration: none; 
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    /* Hover en Rojo Gym */
+    header > nav ul li a:hover { color: #cc0000; }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+        background-color: #f9f9f9;
+    }
+
+    main > h2 {
+        text-transform: uppercase;
+        color: #333;
+        font-size: 2em;
+    }
+
+    /* ESTILOS DE LA TABLA */
+    table { 
+        width: 70%; 
+        border-collapse: collapse; 
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        background-color: white;
+    }
+    
+    th, td { 
+        border: 1px solid #ddd; 
+        padding: 15px; 
+        text-align: center; 
+    }
+
+    /* Encabezado de tabla ROJO (Antes era violeta) */
+    thead th { 
+        background-color: #cc0000; 
+        color: white; 
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Filas alternas */
+    tr:nth-child(odd) { background-color: #ffffff; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    
+    /* Hover fila */
+    tr:hover { 
+        background-color: #ffcccc; /* Rojo muy suave */
+        font-weight: bold;
+        cursor: default;
+    }
+
+    /* CLASES DE ESTILO */
+    .enfasis { font-style: italic; font-weight: 900; color: #cc0000; }
+    .fondo_negro { color: white; background-color: black; padding: 4px 8px; border-radius: 4px; }
+
+    footer {
+        width: 100%;
+        height: 60px;
+        background-color: black;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        font-size: 0.8em;
+        border-top: 3px solid #cc0000;
+    }
+    footer a { color: white; text-decoration: none; }
+    footer a:hover { color: #cc0000; }
+
+    /* MÓVIL */
+    @media (max-width: 600px) {
+        body { overflow-y: auto; }
+        header { flex-direction: column; gap: 10px; }
+        nav ul { flex-direction: column; gap: 5px; }
+        table { width: 95%; font-size: 0.8em; }
+        th, td { padding: 8px; }
+        footer { font-size: 0.6em; flex-direction: column; gap: 5px;}
+    }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <a href="index.html" style="color: white; text-decoration: none;">
+            <h1>Gimnasio Hércules</h1>
+        </a>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="multimedia.html">Multimedia</a></li>
+                <li><a href="programa.html" style="color:#cc0000;">Programa</a></li>
+                <li><a href="registro.html">Registro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Programa de Clases</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hora</th>
+                    <th>Actividad</th>
+                    <th>Sala / Monitor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>09:00</td>
+                    <td><span class="enfasis">Crossfit Matinal</span></td>
+                    <td>Sala Box (Monitor Javi)</td>
+                </tr>
+                <tr>
+                    <td>11:00</td>
+                    <td>Pilates Suave</td>
+                    <td><span class="fondo_negro">Sala Relax</span></td>
+                </tr>
+                <tr>
+                    <td>17:00</td>
+                    <td><span class="enfasis">Zumba Extreme</span></td>
+                    <td>Sala de Baile (Monitora Sara)</td>
+                </tr>
+                <tr>
+                    <td>19:00</td>
+                    <td>Musculación Libre</td>
+                    <td>Sala de Pesas</td>
+                </tr>
+                <tr>
+                    <td>20:30</td>
+                    <td><span class="enfasis">Yoga Nocturno</span></td>
+                    <td><span class="fondo_negro">Sala Relax</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    
+    <footer>
+        <p>&copy; Gimnasio Hércules 2025</p>
+        <p>Asignatura Lenguaje de Marcas - IES Isidra de Guzman (Alcalá de Henares)</p>
+        <div class="contacto">
+            <a href="mailto:info@gymhercules.com">info@gymhercules.com</a>
+        </div>
+    </footer>
+
+</body>
+</html>

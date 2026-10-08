@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub Alcalá | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>TechHub <span>_Alcalá</span></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="activo">/dashboard</a></li>
+                <li><a href="multimedia.html">/media</a></li>
+                <li><a href="registro.html">/join</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>System Status: Sala de Juntas & Cabinas</h2>
+        
+        <table>
+            <caption>// Schedule: 12-Feb-2026</caption>
+            <thead>
+                <tr>
+                    <th>Time_Slot</th>
+                    <th>Boardroom_01</th>
+                    <th>Call_Booth_A</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>09:00 - 11:00</td>
+                    <td>
+                        <span class="badge completo">BUSY / MEETING</span>
+                    </td>
+                    <td>
+                        <span class="badge libre">AVAILABLE</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:00 - 13:00</td>
+                    <td>
+                        <span class="badge libre">AVAILABLE</span>
+                    </td>
+                    <td>
+                        <span class="badge libre">AVAILABLE</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>13:00 - 15:00</td>
+                    <td>
+                        <span class="badge completo">BUSY / LUNCH</span>
+                    </td>
+                    <td>
+                        <span class="badge completo">MAINTENANCE</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>15:00 - 18:00</td>
+                    <td>
+                        <span class="badge libre">AVAILABLE</span>
+                    </td>
+                    <td>
+                        <span class="badge completo">BUSY / CALL</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>System v.2.0.4</p>
+        <p>Network: <span style="color:#2ecc71">● Online</span> | Server: <span style="color:#c0392b">● High Load</span></p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa | Tech&Play Fest 2025</title>
+    
+    <style>
+
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+    }
+
+        header {
+        color: white;
+        background-color: black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px;
+    }
+
+    header > nav ul {
+        display: flex;
+    }
+
+    header > nav ul li {
+        margin-right: 20px;
+        list-style: none;
+    }
+
+    header > nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+
+    header > nav ul li a:hover {
+        color: green;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+    }
+
+  table {
+    width: 50%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #777;
+    padding: 10px;
+    text-align: center;
+}
+
+    /* Pseudoclases para filas impares */
+    tr:nth-child(odd) {
+      background-color: #f2f2f2; /* gris claro */
+    }
+
+    /* Pseudoclases para filas pares */
+    tr:nth-child(even) {
+      background-color: #d9edf7; /* azul claro */
+    }
+
+    /* Estilo opcional para el encabezado */
+    th {
+      background-color: blueviolet; /* verde */
+      color: white;
+    }
+
+    tr:hover {
+            background-color: #FADBD8; /* Rojo muy suave al pasar el ratón */
+        }
+
+
+    thead {
+        background-color: black;
+        color: white;
+    }
+
+    footer {
+        width: 100%;
+        height: 60px;
+        background-color: black;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+	font-size:1em;
+    }
+
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        color: grey;
+    }
+
+/* Media query para móviles */
+@media (max-width: 600px) {
+    body{
+         width: 100%;
+    }
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    main {
+        width:100%;
+    }
+    nav ul {
+        flex-direction: column;
+    }
+
+    img, video, audio {
+        width: 100%;
+    }
+    p {
+        width: 100%;
+    }
+ table {
+        width: 100%;
+    }
+footer{
+font-size:0.6em;
+}
+
+}
+
+    </style>
+
+</head>
+<body>
+    
+    <header>
+
+        <a href="index.html" style="color: white; text-decoration: none;">
+            <h1>Tech&Play Fest 2025</h1>
+        </a>
+        
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Inicio</a>
+                </li>
+                <li>
+                    <a href="multimedia.html">Multimedia</a>
+                </li>
+                <li>
+                    <a href="programa.html">Programa</a>
+                </li>
+                <li>
+                    <a href="registro.html">Registro</a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main>
+        <h2>Programa del Evento</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hora</th>
+                    <th>Actividad</th>
+                    <th>Zona</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10:00</td>
+                    <td>DJ Set de apertura</td>
+                    <td>Escenario Principal</td>
+                </tr>
+                <tr>
+                    <td>12:00</td>
+                    <td>Torneo eSport 5vs5</td>
+                    <td>Arena Gaming</td>
+                </tr>
+                <tr>
+                    <td>15:30</td>
+                    <td>Carrera de drones</td>
+                    <td>Zona exterior</td>
+                </tr>
+                <tr>
+                    <td>17:00</td>
+                    <td>Taller de programación Web</td>
+                    <td>Sala Tech</td>
+                </tr>
+                <tr>
+                    <td>20:00</td>
+                    <td>Actuación DJ Tester</td>
+                    <td>Escenario Principal</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    
+    <footer>
+
+        <p>&copy; Tech&Play Fest 2025</p>
+        <p>Asignatura Lenguaje de Marcas - IES Isidra de Guzman (Alcalá de Henares)</p>
+        <div class="contacto">
+            <a href="mailto:ies.isidra.guzman@correo.com">ies.isidra.guzman@correo.com</a>
+            <a href="#">Alcalá de Henares</a>
+        </div>
+    </footer>
+
+</body>
+</html>

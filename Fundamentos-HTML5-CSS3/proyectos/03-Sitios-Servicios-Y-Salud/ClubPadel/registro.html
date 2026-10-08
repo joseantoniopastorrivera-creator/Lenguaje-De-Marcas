@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripciones y Reservas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Set & Match Alcalá</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="programa.html">Torneo Benéfico</a></li>
+                <li><a href="registro.html" class="activo">Inscripciones</a></li>
+                <li><a href="multimedia.html">Galería</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Área de Reservas</h2>
+
+        <div class="contenedor-formularios">
+            
+            <form action="http://www.google.com">
+                <h3>🏆 Inscripción Torneo Padel</h3>
+                
+                <label for="pareja">* Nombre de la Pareja:</label>
+                <input type="text" id="pareja" name="pareja" required placeholder="Ej: Los Invencibles">
+
+                <label for="nivel">* Nivel:</label>
+                <select id="nivel" name="nivel">
+                    <option>Iniciación</option>
+                    <option>Medio (3.0 - 4.0)</option>
+                    <option>Avanzado (+4.5)</option>
+                </select>
+
+                <label for="email1">* Email Capitán:</label>
+                <input type="email" id="email1" name="email" required>
+
+                <label>
+                    <input type="checkbox" required> Acepto reglamento
+                </label>
+
+                <input type="submit" value="Inscribirse al Torneo">
+            </form>
+
+            <form action="http://www.google.com">
+                <h3>🍔 Reserva Mesa "3er Set Bar"</h3>
+                
+                <label for="nombre">* Nombre Reserva:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="personas">* Nº Personas:</label>
+                <input type="number" id="personas" name="personas" min="1" max="20" value="4">
+
+                <label for="hora">* Hora:</label>
+                <input type="time" id="hora" name="hora" value="14:00">
+
+                <label>
+                    <input type="checkbox" name="terraza"> Preferencia Terraza
+                </label>
+
+                <input type="submit" value="Reservar Mesa" style="background-color: #e67e22;"> </form>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Set & Match Alcalá</p>
+    </footer>
+
+</body>
+</html>

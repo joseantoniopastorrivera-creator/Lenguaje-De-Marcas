@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | Tech&Play Fest 2025</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        header {
+            color: white;
+            background-color: black;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+        }
+
+        header>nav ul {
+            display: flex;
+        }
+
+        header>nav ul li {
+            margin-right: 20px;
+            list-style: none;
+        }
+
+        header>nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        header>nav ul li a:hover {
+            color: green;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+        }
+
+        .asistencia {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: self-start;
+        }
+
+        .preferencias {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: self-start;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            gap: 10px;
+        }
+
+        footer {
+            width: 100%;
+            height: 60px;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            font-size: 1em;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: grey;
+        }
+
+        /* Media query para móviles */
+        @media (max-width: 600px) {
+            body {
+                overflow-y: auto;
+                /* Scroll vertical */
+                overflow-x: hidden;
+                /* Sin scroll horizontal */
+            }
+
+            footer {
+                font-size: 0.6em;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            img,
+            video {
+                width: 100%;
+            }
+
+            p {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <a href="index.html" style="color: white; text-decoration: none;">
+            <h1>Tech&Play Fest 2025</h1>
+        </a>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Inicio</a>
+                </li>
+                <li>
+                    <a href="multimedia.html">Multimedia</a>
+                </li>
+                <li>
+                    <a href="programa.html">Programa</a>
+                </li>
+                <li>
+                    <a href="registro.html">Registro</a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main>
+        <h2>Registro al Evento</h2>
+        <form action="http://www.google.com">
+            <label for="text">*Nombre</label>
+            <input type="text" required>
+
+            <label for="email">* Correo Electrónico</label>
+            <input type="email" required contains="@">
+
+            <label for="date">* Fecha de nacimiento</label>
+            <input type="date" required value="2015-01-01" min="2015-01-01"">
+
+            <select name=" actividad-favorita">
+            <option value="1">Torneo eSport</option>
+            <option value="2">Música</option>
+            <option value="3">Talleres</option>
+            <option value="4">Torneo eSport</option>
+            </select>
+
+            <div class="asistencia">
+                <label for="asistencia">Has asistido al evento?</label>
+                <div class="si">
+                    <input type="radio" id="asistencia" name="asistencia" value="si">
+                    <label for="asistencia">Si</label>
+                </div>
+                <div class="no">
+                    <input type="radio" id="asistencia" name="asistencia">
+                    <label for="asistencia">No</label>
+                </div>
+            </div>
+
+            <div class="preferencias">
+                <label for="checkbox">Preferencias:</label>
+                <div class="recibir">
+                    <label for="checkbox">Recibir newsletter</label>
+                    <input type="checkbox">
+                </div>
+                <div class="promociones">
+                    <label for="checkbox">Promociones</label>
+                    <input type="checkbox">
+                </div>
+            </div>
+
+            <div class="privacidad">
+                <input type="checkbox" required>
+                <label for="checkbox">* Acepto los términos y condiciones</label>
+            </div>
+
+            <input type="submit">
+        </form>
+    </main>
+
+    <footer>
+
+        <p>&copy; Tech&Play Fest 2025</p>
+        <p>Asignatura Lenguaje de Marcas - IES Isidra de Guzman (Alcalá de Henares)</p>
+        <div class="contacto">
+            <a href="mailto:ies.isidra.guzman@correo.com">ies.isidra.guzman@correo.com</a>
+            <a href="#">Alcalá de Henares</a>
+        </div>
+    </footer>
+</body>
+
+</html>
