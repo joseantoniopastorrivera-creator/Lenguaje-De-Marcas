@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chuleta UT7 — XPATH, XSLT y XQuery</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --bg2: #16161d;
+    --bg3: #1e1e28;
+    --border: #2a2a38;
+    --text: #e8e8f0;
+    --muted: #888899;
+    --accent: #7c6af7;
+    --accent2: #4ecdc4;
+    --accent3: #ff6b6b;
+    --accent4: #ffd93d;
+    --green: #6bcb77;
+    --code-bg: #12121a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
+
+  /* HEADER */
+  header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 2rem; text-align: center; border-bottom: 1px solid var(--border); }
+  header h1 { font-size: 2rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--muted); margin-top: 0.4rem; font-size: 13px; }
+  .badges { display: flex; gap: 8px; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+  .b-v { background: #7c6af722; color: var(--accent); border: 1px solid var(--accent); }
+  .b-t { background: #4ecdc422; color: var(--accent2); border: 1px solid var(--accent2); }
+  .b-r { background: #ff6b6b22; color: var(--accent3); border: 1px solid var(--accent3); }
+  .b-y { background: #ffd93d22; color: var(--accent4); border: 1px solid var(--accent4); }
+
+  /* NAV TABS */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--bg2); border-bottom: 1px solid var(--border); display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+  nav::-webkit-scrollbar { display: none; }
+  nav button { padding: 0.85rem 1.2rem; background: none; border: none; color: var(--muted); font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  nav button:hover { color: var(--text); background: var(--bg3); }
+  nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* LAYOUT */
+  main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* SECTIONS GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  @media(max-width:768px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* CARDS */
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
+  .card h2 { font-size: 15px; font-weight: 600; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+  .card h2::before { content: ''; display: inline-block; width: 3px; height: 15px; background: var(--accent); border-radius: 2px; }
+  .card h3 { font-size: 13px; font-weight: 600; color: var(--accent2); margin: 0.9rem 0 0.4rem; }
+  .card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 0.5rem; }
+
+  /* CODE BLOCKS */
+  pre, code { font-family: 'Consolas', 'Fira Code', 'Courier New', monospace; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; font-size: 12px; line-height: 1.7; overflow-x: auto; margin: 0.5rem 0; color: #c9d1d9; }
+  .kw { color: #ff7b72; }   /* keywords */
+  .tg { color: #7ee787; }   /* tags */
+  .at { color: #79c0ff; }   /* attributes */
+  .st { color: #a5d6ff; }   /* strings */
+  .cm { color: #8b949e; }   /* comments */
+  .fn { color: #d2a8ff; }   /* functions */
+  .vr { color: #ffa657; }   /* variables */
+  .nm { color: #e3b341; }   /* numbers */
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 0.5rem 0; }
+  th { background: var(--bg3); color: var(--accent); font-weight: 600; padding: 8px 10px; text-align: left; border: 1px solid var(--border); }
+  td { padding: 7px 10px; border: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--bg3); }
+  td code { background: var(--code-bg); padding: 1px 5px; border-radius: 3px; font-size: 11px; color: var(--accent2); }
+
+  /* EXERCISE BLOCKS */
+  .ex-block { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; }
+  .ex-num { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+  .ex-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+  .ex-desc { font-size: 12px; color: var(--muted); margin-bottom: 0.6rem; }
+
+  /* TOGGLE */
+  .toggle { background: var(--bg); border: 1px solid var(--border); color: var(--muted); padding: 5px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .sol { display: none; margin-top: 0.75rem; }
+
+  /* EXAM */
+  .exam-q { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  .exam-q .qnum { font-size: 10px; font-weight: 700; color: var(--accent4); text-transform: uppercase; letter-spacing: 1px; }
+  .exam-q .qtext { font-size: 13px; color: var(--text); margin: 0.4rem 0 0.7rem; font-weight: 500; }
+  .options { list-style: none; margin-bottom: 0.75rem; }
+  .options li { padding: 5px 10px; margin: 3px 0; border-radius: 5px; font-size: 12px; color: var(--muted); border: 1px solid transparent; cursor: default; }
+  .options li.correct { background: #6bcb7720; border-color: var(--green); color: var(--green); font-weight: 600; }
+  .options li.wrong { background: #ff6b6b10; border-color: #ff6b6b44; color: #ff6b6b88; text-decoration: line-through; }
+  .ans-box { background: var(--code-bg); border: 1px solid var(--green); border-radius: 6px; padding: 0.75rem 1rem; font-size: 12px; color: var(--green); font-family: 'Consolas', monospace; white-space: pre-wrap; display: none; margin-top: 0.5rem; }
+  .ans-txt { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; font-size: 12px; color: #c9d1d9; display: none; margin-top: 0.5rem; }
+
+  /* SECTION TITLE */
+  .sec-title { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .sec-title span { color: var(--accent); }
+
+  /* ALERT */
+  .alert { padding: 0.75rem 1rem; border-radius: 8px; font-size: 12px; margin: 0.75rem 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-warn { background: #ffd93d15; border: 1px solid #ffd93d44; color: var(--accent4); }
+  .alert-info { background: #7c6af715; border: 1px solid #7c6af744; color: var(--accent); }
+  .alert-ok { background: #6bcb7715; border: 1px solid #6bcb7744; color: var(--green); }
+
+  /* XML DATA DISPLAY */
+  .xml-tree { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; font-family: 'Consolas', monospace; font-size: 11px; overflow-x: auto; margin: 0.5rem 0; }
+
+  /* FLOWR diagram */
+  .flowr { display: flex; flex-direction: column; gap: 4px; margin: 0.5rem 0; }
+  .flowr-item { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 6px; font-size: 12px; }
+  .flowr-letter { font-size: 18px; font-weight: 800; width: 24px; flex-shrink: 0; }
+  .fi-f { background: #7c6af718; border-left: 3px solid var(--accent); }
+  .fi-l { background: #4ecdc418; border-left: 3px solid var(--accent2); }
+  .fi-o { background: #6bcb7718; border-left: 3px solid var(--green); }
+  .fi-w { background: #ffd93d18; border-left: 3px solid var(--accent4); }
+  .fi-r { background: #ff6b6b18; border-left: 3px solid var(--accent3); }
+
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-right: 4px; }
+  .p-opt { background: #4ecdc422; color: var(--accent2); }
+  .p-req { background: #ff6b6b22; color: var(--accent3); }
+  .p-ee  { background: #ffd93d22; color: var(--accent4); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Chuleta <span>UT7</span> — XPATH · XSLT · XQuery</h1>
+  <p>Temario completo · Todos los ejercicios resueltos · Simulacro de examen</p>
+  <div class="badges">
+    <span class="badge b-v">XPath 2.0</span>
+    <span class="badge b-t">XSLT 2.0</span>
+    <span class="badge b-r">XQuery 3.1</span>
+    <span class="badge b-y">Saxon HE/EE 12.9</span>
+  </div>
+</header>
+
+<nav id="nav">
+  <button class="active" onclick="tab('t1',this)">📌 XPath</button>
+  <button onclick="tab('t2',this)">🔄 XSLT</button>
+  <button onclick="tab('t3',this)">🔍 XQuery</button>
+  <button onclick="tab('t4',this)">📝 Ejercicios XPATH</button>
+  <button onclick="tab('t5',this)">📝 Ejercicios XSLT</button>
+  <button onclick="tab('t6',this)">📝 Ejercicios XQuery</button>
+  <button onclick="tab('t7',this)">⚡ XQuery Update (EE)</button>
+  <button onclick="tab('t8',this)">🖥 Saxon / Comandos</button>
+  <button onclick="tab('t9',this)">🎓 SIMULACRO EXAMEN</button>
+</nav>
+
+<main>
+
+<!-- ===== T1: XPATH ===== -->
+<div id="t1" class="section active">
+  <div class="sec-title">📌 <span>XPath</span> — Navegación en XML</div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>¿Qué es XPath?</h2>
+      <p>Lenguaje de consulta para navegar por la estructura de árbol de un documento XML. Se usa dentro de XSLT y XQuery para seleccionar nodos.</p>
+      <h3>Tipos de nodos</h3>
+      <table>
+        <tr><th>Tipo</th><th>Ejemplo</th></tr>
+        <tr><td>Elemento</td><td><code>&lt;nombre&gt;</code></td></tr>
+        <tr><td>Atributo</td><td><code>id="p01"</code></td></tr>
+        <tr><td>Texto</td><td>Contenido textual del nodo</td></tr>
+        <tr><td>Raíz</td><td>Nodo raíz del documento</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Ejes de XPath</h2>
+      <table>
+        <tr><th>Símbolo / Eje</th><th>Significado</th></tr>
+        <tr><td><code>/</code></td><td>Desde la raíz (ruta absoluta)</td></tr>
+        <tr><td><code>//</code></td><td>En cualquier nivel (descendientes)</td></tr>
+        <tr><td><code>.</code></td><td>Nodo actual</td></tr>
+        <tr><td><code>..</code></td><td>Nodo padre</td></tr>
+        <tr><td><code>@</code></td><td>Atributo</td></tr>
+        <tr><td><code>*</code></td><td>Cualquier elemento hijo</td></tr>
+        <tr><td><code>child::</code></td><td>Hijos directos</td></tr>
+        <tr><td><code>ancestor::</code></td><td>Ancestros</td></tr>
+        <tr><td><code>descendant::</code></td><td>Todos los descendientes</td></tr>
+        <tr><td><code>following-sibling::</code></td><td>Hermanos siguientes</td></tr>
+        <tr><td><code>preceding-sibling::</code></td><td>Hermanos anteriores</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Predicados — Filtros con [ ]</h2>
+    <div class="grid2">
+      <div>
+        <h3>Por atributo</h3>
+        <pre><span class="cm">(: Persona con id exacto :)</span>
+//persona[@id="p02"]
+
+<span class="cm">(: Personas que TIENEN atributo id :)</span>
+//persona[@id]
+
+<span class="cm">(: Atributo con valor concreto :)</span>
+//movimiento[tipo="ingreso"]</pre>
+      </div>
+      <div>
+        <h3>Por posición</h3>
+        <pre><span class="cm">(: Primer elemento :)</span>
+/biblioteca/libros/libro[1]
+
+<span class="cm">(: Último elemento :)</span>
+/biblioteca/libros/libro[last()]
+
+<span class="cm">(: Posición específica :)</span>
+//persona[position()=2]</pre>
+      </div>
+      <div>
+        <h3>Por existencia de hijo</h3>
+        <pre><span class="cm">(: Personas que tienen móvil :)</span>
+//persona[telefonos/movil]
+
+<span class="cm">(: Personas que tienen teléfono casa :)</span>
+//persona[telefonos/casa]
+
+<span class="cm">(: Libros con préstamos activos :)</span>
+//libro[estado_prestamos/prestamo]</pre>
+      </div>
+      <div>
+        <h3>Operadores lógicos</h3>
+        <pre><span class="cm">(: AND :)</span>
+//baile[sala=1 and precio &gt; 25]
+
+<span class="cm">(: OR :)</span>
+//baile[sala=1 or sala=2]
+
+<span class="cm">(: NOT :)</span>
+//persona[not(telefonos/movil)]
+
+<span class="cm">(: Comparaciones :)</span>
+//cuenta[fechaApertura &gt; '2022-01-01']</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Funciones XPath más usadas</h2>
+    <table>
+      <tr><th>Función</th><th>Uso</th><th>Ejemplo</th></tr>
+      <tr><td><code>text()</code></td><td>Devuelve el texto del nodo (sin etiquetas)</td><td><code>nombre/text()</code></td></tr>
+      <tr><td><code>concat(a,b,...)</code></td><td>Une cadenas de texto</td><td><code>concat(nombre,' ',apellidos)</code></td></tr>
+      <tr><td><code>count()</code></td><td>Cuenta nodos</td><td><code>count(//persona)</code></td></tr>
+      <tr><td><code>sum()</code></td><td>Suma valores numéricos</td><td><code>sum(//importe)</code></td></tr>
+      <tr><td><code>contains(str,sub)</code></td><td>Comprueba si contiene subcadena</td><td><code>contains(titulo,'Viento')</code></td></tr>
+      <tr><td><code>starts-with(str,sub)</code></td><td>Comprueba si empieza por</td><td><code>starts-with(nombre,'A')</code></td></tr>
+      <tr><td><code>normalize-space()</code></td><td>Elimina espacios extra</td><td><code>normalize-space(nombre)</code></td></tr>
+      <tr><td><code>string-length()</code></td><td>Longitud de la cadena</td><td><code>string-length(nombre)</code></td></tr>
+      <tr><td><code>not()</code></td><td>Niega una condición</td><td><code>not(telefonos/movil)</code></td></tr>
+      <tr><td><code>position()</code></td><td>Posición del nodo actual</td><td><code>position() = 1</code></td></tr>
+      <tr><td><code>last()</code></td><td>Último nodo del conjunto</td><td><code>libro[last()]</code></td></tr>
+      <tr><td><code>name()</code></td><td>Nombre del nodo</td><td><code>name(.)</code></td></tr>
+      <tr><td><code>number()</code></td><td>Convierte a número</td><td><code>number(importe)</code></td></tr>
+      <tr><td><code>string()</code></td><td>Convierte a texto</td><td><code>string(@id)</code></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>El operador | (unión de conjuntos)</h2>
+    <p>Permite combinar dos expresiones XPath en un único conjunto de nodos:</p>
+    <pre>//contactos/persona/identificadores/nombre |
+//contactos/persona/identificadores/apellidos
+
+<span class="cm">(: Propietario Y contactos :)</span>
+/agenda/propietario | /agenda/contactos/persona</pre>
+  </div>
+
+  <div class="card">
+    <h2>XMLs del curso — Estructura resumida</h2>
+    <div class="grid3">
+      <div>
+        <h3>Agenda_Propietario_Alma.xml</h3>
+        <pre class="xml-tree"><span class="tg">&lt;agenda&gt;</span>
+  <span class="tg">&lt;propietario&gt;</span>
+    <span class="tg">&lt;identificadores&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>Alma<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;apellidos&gt;</span>López Terán<span class="tg">&lt;/apellidos&gt;</span>
+    <span class="tg">&lt;/identificadores&gt;</span>
+    <span class="tg">&lt;direccion&gt;</span>
+      <span class="tg">&lt;calle&gt;</span>El Percebe 13, 6F<span class="tg">&lt;/calle&gt;</span>
+      <span class="tg">&lt;localidad&gt;</span>Torrelavega<span class="tg">&lt;/localidad&gt;</span>
+      <span class="tg">&lt;cp&gt;</span>39300<span class="tg">&lt;/cp&gt;</span>
+    <span class="tg">&lt;/direccion&gt;</span>
+    <span class="tg">&lt;telefonos&gt;</span>
+      <span class="tg">&lt;movil&gt;</span>970898765<span class="tg">&lt;/movil&gt;</span>
+      <span class="tg">&lt;casa&gt;</span>942124567<span class="tg">&lt;/casa&gt;</span>
+      <span class="tg">&lt;trabajo&gt;</span>628983456<span class="tg">&lt;/trabajo&gt;</span>
+    <span class="tg">&lt;/telefonos&gt;</span>
+  <span class="tg">&lt;/propietario&gt;</span>
+  <span class="tg">&lt;contactos&gt;</span>
+    <span class="tg">&lt;persona <span class="at">id</span>=<span class="st">"p01"</span>&gt;</span>
+      ... (Inés, Santander)
+    <span class="tg">&lt;/persona&gt;</span>
+    <span class="tg">&lt;persona <span class="at">id</span>=<span class="st">"p02"</span>&gt;</span>
+      ... (Roberto, Santander)
+    <span class="tg">&lt;/persona&gt;</span>
+    <span class="tg">&lt;persona <span class="at">id</span>=<span class="st">"p03"</span>&gt;</span>
+      ... (Juan, Torrelavega)
+    <span class="tg">&lt;/persona&gt;</span>
+  <span class="tg">&lt;/contactos&gt;</span>
+<span class="tg">&lt;/agenda&gt;</span></pre>
+      </div>
+      <div>
+        <h3>movimientos_bancarios.xml</h3>
+        <pre class="xml-tree"><span class="tg">&lt;banco <span class="at">fechaGeneracion</span>=<span class="st">"2026-03-16"</span>&gt;</span>
+  <span class="tg">&lt;cuentas&gt;</span>
+    <span class="tg">&lt;cuenta <span class="at">id</span>=<span class="st">"ACC-001"</span>&gt;</span>
+      <span class="tg">&lt;titular&gt;</span>
+        <span class="tg">&lt;nombreCompleto&gt;</span>Ana Martínez<span class="tg">&lt;/nombreCompleto&gt;</span>
+        <span class="tg">&lt;documento <span class="at">tipo</span>=<span class="st">"NIF"</span>&gt;</span>00000001A<span class="tg">&lt;/documento&gt;</span>
+      <span class="tg">&lt;/titular&gt;</span>
+      <span class="tg">&lt;fechaApertura&gt;</span>2022-01-14<span class="tg">&lt;/fechaApertura&gt;</span>
+      <span class="tg">&lt;saldoActual&gt;</span>4280.55<span class="tg">&lt;/saldoActual&gt;</span>
+      <span class="tg">&lt;movimientos&gt;</span>
+        <span class="tg">&lt;movimiento <span class="at">id</span>=<span class="st">"ACC-001-MOV-001"</span>&gt;</span>
+          <span class="tg">&lt;fecha&gt;</span>2026-03-15<span class="tg">&lt;/fecha&gt;</span>
+          <span class="tg">&lt;concepto&gt;</span>Nómina marzo<span class="tg">&lt;/concepto&gt;</span>
+          <span class="tg">&lt;tipo&gt;</span>ingreso<span class="tg">&lt;/tipo&gt;</span>
+          <span class="tg">&lt;importe&gt;</span>2450.00<span class="tg">&lt;/importe&gt;</span>
+        <span class="tg">&lt;/movimiento&gt;</span>
+      <span class="tg">&lt;/movimientos&gt;</span>
+    <span class="tg">&lt;/cuenta&gt;</span>
+  <span class="tg">&lt;/cuentas&gt;</span>
+<span class="tg">&lt;/banco&gt;</span></pre>
+      </div>
+      <div>
+        <h3>Academia_Baile.xml</h3>
+        <pre class="xml-tree"><span class="tg">&lt;Bailes&gt;</span>
+  <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"2"</span>&gt;</span>
+    <span class="tg">&lt;nombre&gt;</span>Cha-cha-cha<span class="tg">&lt;/nombre&gt;</span>
+    <span class="tg">&lt;precio <span class="at">cuota</span>=<span class="st">"trimestral"</span>
+            <span class="at">moneda</span>=<span class="st">"euro"</span>&gt;</span>80<span class="tg">&lt;/precio&gt;</span>
+    <span class="tg">&lt;plazas&gt;</span>18<span class="tg">&lt;/plazas&gt;</span>
+    <span class="tg">&lt;comienzo&gt;</span>1/2/2011<span class="tg">&lt;/comienzo&gt;</span>
+    <span class="tg">&lt;fin&gt;</span>31/7/2011<span class="tg">&lt;/fin&gt;</span>
+    <span class="tg">&lt;profesor&gt;</span>Miriam Gutierrez<span class="tg">&lt;/profesor&gt;</span>
+    <span class="tg">&lt;sala&gt;</span>1<span class="tg">&lt;/sala&gt;</span>
+  <span class="tg">&lt;/baile&gt;</span>
+  <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"3"</span>&gt;</span>...(Rock, Laura Mendiola)<span class="tg">&lt;/baile&gt;</span>
+  <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"4"</span>&gt;</span>...(Merengue, Gabriel Lopez)<span class="tg">&lt;/baile&gt;</span>
+  <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"5"</span>&gt;</span>...(Salsa, Jesus Lozano)<span class="tg">&lt;/baile&gt;</span>
+  <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"6"</span>&gt;</span>...(Pasodoble, Miriam Gutierrez)<span class="tg">&lt;/baile&gt;</span>
+  <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"7"</span>&gt;</span>...(Bachata, Marcio Monteiro)<span class="tg">&lt;/baile&gt;</span>
+  <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"8"</span>&gt;</span>...(Tango, Roberto Garcia)<span class="tg">&lt;/baile&gt;</span>
+<span class="tg">&lt;/Bailes&gt;</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== T2: XSLT ===== -->
+<div id="t2" class="section">
+  <div class="sec-title">🔄 <span>XSLT</span> — Transformación de XML</div>
+
+  <div class="card">
+    <h2>¿Qué es XSLT?</h2>
+    <p>XSLT (eXtensible Stylesheet Language Transformations) transforma documentos XML en otros XML, HTML, texto, etc., usando plantillas y expresiones XPath.</p>
+    <div class="alert alert-info">💡 Los ficheros XSLT tienen extensión <strong>.xsl</strong> y son XML válidos con el namespace <code>xmlns:xsl="http://www.w3.org/1999/XSL/Transform"</code></div>
+  </div>
+
+  <div class="card">
+    <h2>Estructura base obligatoria</h2>
+    <pre><span class="tg">&lt;?xml version=<span class="st">"1.0"</span> encoding=<span class="st">"UTF-8"</span>?&gt;</span>
+<span class="tg">&lt;xsl:stylesheet <span class="at">version</span>=<span class="st">"2.0"</span>
+  <span class="at">xmlns:xsl</span>=<span class="st">"http://www.w3.org/1999/XSL/Transform"</span>&gt;</span>
+
+  <span class="cm">&lt;!-- Tipo de salida: xml | html | text --&gt;</span>
+  <span class="tg">&lt;xsl:output <span class="at">method</span>=<span class="st">"xml"</span> <span class="at">indent</span>=<span class="st">"yes"</span> <span class="at">encoding</span>=<span class="st">"UTF-8"</span>/&gt;</span>
+
+  <span class="cm">&lt;!-- Plantilla principal: match="/" = raíz del doc --&gt;</span>
+  <span class="tg">&lt;xsl:template <span class="at">match</span>=<span class="st">"/"</span>&gt;</span>
+    <span class="cm">&lt;!-- aquí va la transformación --&gt;</span>
+  <span class="tg">&lt;/xsl:template&gt;</span>
+
+<span class="tg">&lt;/xsl:stylesheet&gt;</span></pre>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>xsl:value-of — Extraer valor</h2>
+      <p>Extrae el <strong>contenido de texto</strong> de un nodo.</p>
+      <pre><span class="tg">&lt;nombre&gt;</span>
+  <span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"identificadores/nombre"</span>/&gt;</span>
+<span class="tg">&lt;/nombre&gt;</span>
+
+<span class="cm">&lt;!-- Con función concat :--&gt;</span>
+<span class="tg">&lt;nombre_completo&gt;</span>
+  <span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"concat(identificadores/nombre,
+    ' ', identificadores/apellidos)"</span>/&gt;</span>
+<span class="tg">&lt;/nombre_completo&gt;</span></pre>
+    </div>
+    <div class="card">
+      <h2>xsl:for-each — Iterar nodos</h2>
+      <p>Recorre un conjunto de nodos y aplica la transformación a cada uno.</p>
+      <pre><span class="tg">&lt;contactos&gt;</span>
+  <span class="tg">&lt;xsl:for-each <span class="at">select</span>=<span class="st">"agenda/contactos/persona"</span>&gt;</span>
+    <span class="tg">&lt;contacto <span class="at">id</span>=<span class="st">"{@id}"</span>&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>
+        <span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"identificadores/nombre"</span>/&gt;</span>
+      <span class="tg">&lt;/nombre&gt;</span>
+    <span class="tg">&lt;/contacto&gt;</span>
+  <span class="tg">&lt;/xsl:for-each&gt;</span>
+<span class="tg">&lt;/contactos&gt;</span></pre>
+      <div class="alert alert-info">💡 <code>{@id}</code> es un AVT (Attribute Value Template) — inserta el valor del atributo <code>id</code> dinámicamente.</div>
+    </div>
+    <div class="card">
+      <h2>xsl:apply-templates — Delegar a plantillas</h2>
+      <p>Llama a otras plantillas definidas con <code>xsl:template match=</code></p>
+      <pre><span class="cm">&lt;!-- En la plantilla principal :--&gt;</span>
+<span class="tg">&lt;xsl:apply-templates <span class="at">select</span>=<span class="st">"agenda/contactos/persona"</span>/&gt;</span>
+
+<span class="cm">&lt;!-- Plantilla específica para persona :--&gt;</span>
+<span class="tg">&lt;xsl:template <span class="at">match</span>=<span class="st">"persona"</span>&gt;</span>
+  <span class="tg">&lt;tr&gt;</span>
+    <span class="tg">&lt;td&gt;</span><span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"identificadores/nombre"</span>/&gt;</span><span class="tg">&lt;/td&gt;</span>
+    <span class="tg">&lt;td&gt;</span><span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"telefonos/movil"</span>/&gt;</span><span class="tg">&lt;/td&gt;</span>
+  <span class="tg">&lt;/tr&gt;</span>
+<span class="tg">&lt;/xsl:template&gt;</span></pre>
+    </div>
+    <div class="card">
+      <h2>xsl:if — Condición simple</h2>
+      <pre><span class="tg">&lt;xsl:if <span class="at">test</span>=<span class="st">"telefonos/movil"</span>&gt;</span>
+  <span class="tg">&lt;movil&gt;</span><span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"telefonos/movil"</span>/&gt;</span><span class="tg">&lt;/movil&gt;</span>
+<span class="tg">&lt;/xsl:if&gt;</span>
+
+<span class="cm">&lt;!-- Con predicado numérico :--&gt;</span>
+<span class="tg">&lt;xsl:if <span class="at">test</span>=<span class="st">"count(telefonos/*) &gt; 1"</span>&gt;</span>
+  <span class="tg">&lt;multiples-telefonos/&gt;</span>
+<span class="tg">&lt;/xsl:if&gt;</span></pre>
+      <h2 style="margin-top:1rem">xsl:choose — Condición múltiple</h2>
+      <pre><span class="tg">&lt;xsl:choose&gt;</span>
+  <span class="tg">&lt;xsl:when <span class="at">test</span>=<span class="st">"estado_prestamos/prestamo"</span>&gt;</span>SI<span class="tg">&lt;/xsl:when&gt;</span>
+  <span class="tg">&lt;xsl:otherwise&gt;</span>NO<span class="tg">&lt;/xsl:otherwise&gt;</span>
+<span class="tg">&lt;/xsl:choose&gt;</span></pre>
+    </div>
+    <div class="card">
+      <h2>xsl:sort — Ordenar resultados</h2>
+      <pre><span class="tg">&lt;xsl:for-each <span class="at">select</span>=<span class="st">"contactos/persona"</span>&gt;</span>
+  <span class="cm">&lt;!-- Dentro del for-each, antes del contenido :--&gt;</span>
+  <span class="tg">&lt;xsl:sort <span class="at">select</span>=<span class="st">"identificadores/apellidos"</span>/&gt;</span>
+  <span class="cm">&lt;!-- También se puede: order="descending" :--&gt;</span>
+  <span class="tg">&lt;xsl:sort <span class="at">select</span>=<span class="st">"importe"</span> <span class="at">order</span>=<span class="st">"descending"</span>
+            <span class="at">data-type</span>=<span class="st">"number"</span>/&gt;</span>
+  <span class="tg">&lt;contacto&gt;</span>...<span class="tg">&lt;/contacto&gt;</span>
+<span class="tg">&lt;/xsl:for-each&gt;</span></pre>
+    </div>
+    <div class="card">
+      <h2>xsl:copy-of — Copiar nodo con hijos</h2>
+      <pre><span class="cm">&lt;!-- Copia el nodo telefonos con todos sus hijos :--&gt;</span>
+<span class="tg">&lt;xsl:copy-of <span class="at">select</span>=<span class="st">"telefonos"</span>/&gt;</span>
+
+<span class="cm">&lt;!-- Copia el nodo persona[@id='p02'] completo :--&gt;</span>
+<span class="tg">&lt;xsl:copy-of <span class="at">select</span>=<span class="st">"//persona[@id='p02']"</span>/&gt;</span></pre>
+      <div class="alert alert-warn">⚠️ <code>copy-of</code> copia etiquetas + contenido. <code>value-of</code> solo copia el texto.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Salida a HTML completa</h2>
+    <pre><span class="tg">&lt;xsl:output <span class="at">method</span>=<span class="st">"html"</span> <span class="at">indent</span>=<span class="st">"yes"</span> <span class="at">encoding</span>=<span class="st">"UTF-8"</span> <span class="at">omit-xml-declaration</span>=<span class="st">"yes"</span>/&gt;</span>
+
+<span class="tg">&lt;xsl:template <span class="at">match</span>=<span class="st">"/"</span>&gt;</span>
+  <span class="tg">&lt;html&gt;&lt;head&gt;</span>
+    <span class="tg">&lt;title&gt;</span>Agenda de <span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"agenda/propietario/identificadores/nombre"</span>/&gt;</span><span class="tg">&lt;/title&gt;</span>
+    <span class="tg">&lt;style&gt;</span>table{width:100%;border-collapse:collapse}
+      th{background:#4CAF50;color:white;padding:12px}
+      td{border:1px solid #ddd;padding:10px}
+      tr:nth-child(even){background:#f2f2f2}<span class="tg">&lt;/style&gt;</span>
+  <span class="tg">&lt;/head&gt;&lt;body&gt;</span>
+    <span class="tg">&lt;h1&gt;</span>Agenda de <span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"agenda/propietario/identificadores/nombre"</span>/&gt;</span><span class="tg">&lt;/h1&gt;</span>
+    <span class="tg">&lt;table&gt;</span>
+      <span class="tg">&lt;thead&gt;&lt;tr&gt;</span>
+        <span class="tg">&lt;th&gt;</span>Nombre<span class="tg">&lt;/th&gt;&lt;th&gt;</span>Apellidos<span class="tg">&lt;/th&gt;&lt;th&gt;</span>Móvil<span class="tg">&lt;/th&gt;&lt;th&gt;</span>Localidad<span class="tg">&lt;/th&gt;</span>
+      <span class="tg">&lt;/tr&gt;&lt;/thead&gt;</span>
+      <span class="tg">&lt;tbody&gt;</span>
+        <span class="tg">&lt;xsl:apply-templates <span class="at">select</span>=<span class="st">"agenda/contactos/persona"</span>/&gt;</span>
+      <span class="tg">&lt;/tbody&gt;</span>
+    <span class="tg">&lt;/table&gt;</span>
+  <span class="tg">&lt;/body&gt;&lt;/html&gt;</span>
+<span class="tg">&lt;/xsl:template&gt;</span>
+
+<span class="tg">&lt;xsl:template <span class="at">match</span>=<span class="st">"persona"</span>&gt;</span>
+  <span class="tg">&lt;tr&gt;</span>
+    <span class="tg">&lt;td&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"identificadores/nombre"</span>/&gt;&lt;/td&gt;</span>
+    <span class="tg">&lt;td&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"identificadores/apellidos"</span>/&gt;&lt;/td&gt;</span>
+    <span class="tg">&lt;td&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"telefonos/movil"</span>/&gt;&lt;/td&gt;</span>
+    <span class="tg">&lt;td&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"direccion/localidad"</span>/&gt;&lt;/td&gt;</span>
+  <span class="tg">&lt;/tr&gt;</span>
+<span class="tg">&lt;/xsl:template&gt;</span></pre>
+  </div>
+
+  <div class="card">
+    <h2>Tabla resumen de instrucciones XSLT</h2>
+    <table>
+      <tr><th>Instrucción</th><th>Para qué sirve</th><th>Atributo clave</th></tr>
+      <tr><td><code>xsl:template</code></td><td>Define una plantilla de transformación</td><td><code>match="nodo"</code></td></tr>
+      <tr><td><code>xsl:apply-templates</code></td><td>Aplica plantillas a nodos seleccionados</td><td><code>select="ruta"</code></td></tr>
+      <tr><td><code>xsl:for-each</code></td><td>Itera sobre un conjunto de nodos</td><td><code>select="ruta"</code></td></tr>
+      <tr><td><code>xsl:value-of</code></td><td>Extrae el valor de texto de un nodo</td><td><code>select="expresión"</code></td></tr>
+      <tr><td><code>xsl:copy-of</code></td><td>Copia el nodo con toda su estructura</td><td><code>select="expresión"</code></td></tr>
+      <tr><td><code>xsl:if</code></td><td>Condición simple (sin else)</td><td><code>test="condición"</code></td></tr>
+      <tr><td><code>xsl:choose/when/otherwise</code></td><td>Condición múltiple (if/elseif/else)</td><td><code>test="condición"</code> en when</td></tr>
+      <tr><td><code>xsl:sort</code></td><td>Ordena dentro de for-each</td><td><code>select, order, data-type</code></td></tr>
+      <tr><td><code>xsl:output</code></td><td>Define el tipo de salida</td><td><code>method="xml|html|text"</code></td></tr>
+      <tr><td><code>xsl:variable</code></td><td>Declara una variable</td><td><code>name="var" select="valor"</code></td></tr>
+      <tr><td><code>xsl:param</code></td><td>Declara un parámetro</td><td><code>name="param"</code></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== T3: XQUERY ===== -->
+<div id="t3" class="section">
+  <div class="sec-title">🔍 <span>XQuery</span> — Consultas sobre XML</div>
+
+  <div class="card">
+    <h2>¿Qué es XQuery?</h2>
+    <p>Lenguaje de consulta sobre documentos XML. Similar a SQL pero para XML. Usa la estructura FLOWR y permite generar nuevos documentos XML como resultado.</p>
+  </div>
+
+  <div class="card">
+    <h2>Estructura FLOWR — La clave de XQuery</h2>
+    <div class="flowr">
+      <div class="flowr-item fi-f">
+        <span class="flowr-letter" style="color:var(--accent)">F</span>
+        <div>
+          <strong>FOR</strong> — Itera sobre un conjunto de nodos<br>
+          <code style="font-size:11px;color:var(--muted)">for $p in /agenda/contactos/persona</code><br>
+          <code style="font-size:11px;color:var(--muted)">for $p AT $posicion in /agenda/contactos/persona</code> <span class="pill p-opt">opcional</span>
+        </div>
+      </div>
+      <div class="flowr-item fi-l">
+        <span class="flowr-letter" style="color:var(--accent2)">L</span>
+        <div>
+          <strong>LET</strong> — Asigna una expresión a una variable <span class="pill p-opt">opcional</span><br>
+          <code style="font-size:11px;color:var(--muted)">let $nombre := $p/identificadores/nombre</code><br>
+          <code style="font-size:11px;color:var(--muted)">let $total := count(//persona)</code>
+        </div>
+      </div>
+      <div class="flowr-item fi-o">
+        <span class="flowr-letter" style="color:var(--green)">O</span>
+        <div>
+          <strong>ORDER BY</strong> — Ordena los resultados <span class="pill p-opt">opcional</span><br>
+          <code style="font-size:11px;color:var(--muted)">order by $p/identificadores/apellidos</code><br>
+          <code style="font-size:11px;color:var(--muted)">order by $p/importe descending</code>
+        </div>
+      </div>
+      <div class="flowr-item fi-w">
+        <span class="flowr-letter" style="color:var(--accent4)">W</span>
+        <div>
+          <strong>WHERE</strong> — Filtra los resultados <span class="pill p-opt">opcional</span><br>
+          <code style="font-size:11px;color:var(--muted)">where $p/direccion/localidad = "Santander"</code>
+        </div>
+      </div>
+      <div class="flowr-item fi-r">
+        <span class="flowr-letter" style="color:var(--accent3)">R</span>
+        <div>
+          <strong>RETURN</strong> — Define el resultado <span class="pill p-req">obligatorio</span><br>
+          <code style="font-size:11px;color:var(--muted)">return &lt;persona&gt;{ $p/identificadores/nombre }&lt;/persona&gt;</code><br>
+          <code style="font-size:11px;color:var(--muted)">return ($var1, $var2)  ← varios valores: entre paréntesis</code>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-info" style="margin-top:0.75rem">
+      💡 <strong>Las llaves { }</strong> intercalan código XQuery dentro de etiquetas XML.<br>
+      💡 <strong>data()</strong> devuelve el valor del nodo sin etiquetas: <code>data($p/nombre)</code>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Plantilla básica XQuery</h2>
+      <pre><span class="tg">&lt;resultado&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/contactos/persona
+  <span class="kw">where</span> <span class="vr">$p</span>/direccion/localidad = <span class="st">"Santander"</span>
+  <span class="kw">order by</span> <span class="vr">$p</span>/identificadores/apellidos
+  <span class="kw">return</span>
+    <span class="tg">&lt;persona <span class="at">id</span>=<span class="st">"{ $p/@id }"</span>&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>{ <span class="vr">$p</span>/identificadores/nombre/<span class="fn">text</span>() }<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;apellidos&gt;</span>{ <span class="vr">$p</span>/identificadores/apellidos/<span class="fn">text</span>() }<span class="tg">&lt;/apellidos&gt;</span>
+    <span class="tg">&lt;/persona&gt;</span>
+}
+<span class="tg">&lt;/resultado&gt;</span></pre>
+    </div>
+    <div class="card">
+      <h2>Funciones XQuery importantes</h2>
+      <table>
+        <tr><th>Función</th><th>Descripción</th></tr>
+        <tr><td><code>count()</code></td><td>Cuenta nodos</td></tr>
+        <tr><td><code>sum()</code></td><td>Suma valores</td></tr>
+        <tr><td><code>avg()</code></td><td>Media aritmética</td></tr>
+        <tr><td><code>min() / max()</code></td><td>Mínimo / Máximo</td></tr>
+        <tr><td><code>distinct-values()</code></td><td>Elimina duplicados</td></tr>
+        <tr><td><code>exists()</code></td><td>Comprueba si existe</td></tr>
+        <tr><td><code>empty()</code></td><td>Comprueba si está vacío</td></tr>
+        <tr><td><code>concat()</code></td><td>Une cadenas</td></tr>
+        <tr><td><code>string()</code></td><td>Convierte a string</td></tr>
+        <tr><td><code>number()</code></td><td>Convierte a número</td></tr>
+        <tr><td><code>text()</code></td><td>Valor texto sin etiquetas</td></tr>
+        <tr><td><code>doc("fichero.xml")</code></td><td>Carga un doc XML externo</td></tr>
+        <tr><td><code>xs:decimal()</code></td><td>Convierte a decimal</td></tr>
+        <tr><td><code>xs:integer()</code></td><td>Convierte a entero</td></tr>
+        <tr><td><code>normalize-space()</code></td><td>Elimina espacios extra</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Condicional en XQuery — if/then/else</h2>
+    <pre><span class="kw">if</span> (<span class="fn">exists</span>(<span class="vr">$existe</span>)) <span class="kw">then</span>
+  ()  <span class="cm">(: no hacer nada :)</span>
+<span class="kw">else</span>
+  <span class="tg">&lt;resultado&gt;</span>...<span class="tg">&lt;/resultado&gt;</span>
+
+<span class="cm">(: Anidado :)</span>
+<span class="kw">if</span> (<span class="vr">$b</span>/precio/@cuota = <span class="st">"trimestral"</span>)
+<span class="kw">then</span> <span class="kw">replace value of node</span> <span class="vr">$b</span>/precio 
+     <span class="kw">with</span> <span class="fn">string</span>(xs:decimal(<span class="fn">normalize-space</span>(<span class="vr">$b</span>/precio)) * 0.90)
+<span class="kw">else if</span> (<span class="vr">$b</span>/precio/@cuota = <span class="st">"anual"</span>)
+<span class="kw">then</span> <span class="kw">replace value of node</span> <span class="vr">$b</span>/precio 
+     <span class="kw">with</span> <span class="fn">string</span>(xs:decimal(<span class="fn">normalize-space</span>(<span class="vr">$b</span>/precio)) * 0.85)
+<span class="kw">else</span> ()</pre>
+  </div>
+</div>
+
+<!-- ===== T4: EJ XPATH ===== -->
+<div id="t4" class="section">
+  <div class="sec-title">📝 Ejercicios <span>XPATH</span> resueltos</div>
+
+  <div class="card">
+    <h2>Ejercicio 1 completo — Agenda de Alma</h2>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 1.1</div>
+      <div class="ex-title">Nombre del propietario de la agenda</div>
+      <pre>/agenda/propietario/identificadores/nombre</pre>
+      <div class="ex-desc">Resultado: <code>Alma</code></div>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 1.2</div>
+      <div class="ex-title">Teléfono de casa del propietario</div>
+      <pre>/agenda/propietario/telefonos/casa</pre>
+      <div class="ex-desc">Resultado: <code>942124567</code></div>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 1.3</div>
+      <div class="ex-title">Nombres y apellidos de los contactos</div>
+      <pre>//contactos/persona/identificadores/nombre |
+//contactos/persona/identificadores/apellidos</pre>
+      <div class="ex-desc">El operador | une ambos conjuntos de nodos.</div>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 1.4</div>
+      <div class="ex-title">Nombre e identificador de cada contacto</div>
+      <pre>//contactos/persona/identificadores/nombre |
+//contactos/persona/@id</pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 1.5</div>
+      <div class="ex-title">Todos los datos del contacto con id "p02"</div>
+      <pre>//contactos/persona[@id="p02"]/*/*</pre>
+      <div class="ex-desc"><code>[@id="p02"]</code> filtra por atributo. <code>/*/*</code> selecciona todos los nietos (hijos de hijos).</div>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 1.6</div>
+      <div class="ex-title">Identificadores de contactos con teléfono de casa</div>
+      <pre>//contactos/persona/telefonos/casa/../../@id</pre>
+      <div class="ex-desc"><code>../..</code> sube dos niveles (de casa → telefonos → persona), luego <code>@id</code> obtiene el atributo.</div>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 1.7 — Punto 2</div>
+      <div class="ex-title">XSL: Generar XML con nombre, apellidos, teléfonos y dirección concatenada</div>
+      <pre><span class="tg">&lt;xsl:template <span class="at">match</span>=<span class="st">"/agenda"</span>&gt;</span>
+  <span class="tg">&lt;resumen_agenda&gt;</span>
+    <span class="tg">&lt;xsl:for-each <span class="at">select</span>=<span class="st">"contactos/persona"</span>&gt;</span>
+      <span class="tg">&lt;contacto <span class="at">id</span>=<span class="st">"{@id}"</span>&gt;</span>
+        <span class="tg">&lt;nombre_completo&gt;</span>
+          <span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"concat(identificadores/nombre,
+            ' ', identificadores/apellidos)"</span>/&gt;</span>
+        <span class="tg">&lt;/nombre_completo&gt;</span>
+        <span class="tg">&lt;xsl:copy-of <span class="at">select</span>=<span class="st">"telefonos"</span>/&gt;</span>
+        <span class="tg">&lt;direccion_concatenada&gt;</span>
+          <span class="tg">&lt;xsl:value-of <span class="at">select</span>=<span class="st">"concat(direccion/calle, ', ',
+            direccion/localidad, ' (', direccion/cp, ')')"</span>/&gt;</span>
+        <span class="tg">&lt;/direccion_concatenada&gt;</span>
+      <span class="tg">&lt;/contacto&gt;</span>
+    <span class="tg">&lt;/xsl:for-each&gt;</span>
+  <span class="tg">&lt;/resumen_agenda&gt;</span>
+<span class="tg">&lt;/xsl:template&gt;</span></pre>
+      <p style="margin-top:0.5rem">Resultado obtenido (resultado_agenda.xml):</p>
+      <pre><span class="tg">&lt;resumen_agenda&gt;</span>
+  <span class="tg">&lt;contacto <span class="at">id</span>=<span class="st">"p01"</span>&gt;</span>
+    <span class="tg">&lt;nombre_completo&gt;</span>Inés López Pérez<span class="tg">&lt;/nombre_completo&gt;</span>
+    <span class="tg">&lt;telefonos&gt;&lt;movil&gt;</span>970123123<span class="tg">&lt;/movil&gt;&lt;/telefonos&gt;</span>
+    <span class="tg">&lt;direccion_concatenada&gt;</span>El Ranchito 24, 6B, Santander (39006)<span class="tg">&lt;/direccion_concatenada&gt;</span>
+  <span class="tg">&lt;/contacto&gt;</span>
+  <span class="cm">&lt;!-- p02: Roberto Gutiérrez Gómez, Santander (39004) --&gt;</span>
+  <span class="cm">&lt;!-- p03: Juan Sánchez Martínez, Torrelavega (39300) --&gt;</span>
+<span class="tg">&lt;/resumen_agenda&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<!-- ===== T5: EJ XSLT ===== -->
+<div id="t5" class="section">
+  <div class="sec-title">📝 Ejercicios <span>XSLT</span> resueltos</div>
+
+  <div class="card">
+    <h2>Transformaciones Cuenta Bancaria</h2>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio XSLT — Banco completo</div>
+      <div class="ex-title">Cuenta_bancaria_transformacion.xsl — Todos los movimientos</div>
+      <pre><span class="tg">&lt;xsl:template <span class="at">match</span>=<span class="st">"/"</span>&gt;</span>
+  <span class="tg">&lt;cuentas&gt;</span>
+    <span class="tg">&lt;xsl:for-each <span class="at">select</span>=<span class="st">"banco/cuentas/cuenta"</span>&gt;</span>
+      <span class="tg">&lt;cuenta <span class="at">id</span>=<span class="st">"{@id}"</span>&gt;</span>
+        <span class="tg">&lt;titular&gt;</span>
+          <span class="tg">&lt;nombre&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"titular/nombreCompleto"</span>/&gt;&lt;/nombre&gt;</span>
+          <span class="tg">&lt;nif&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"titular/documento"</span>/&gt;&lt;/nif&gt;</span>
+          <span class="tg">&lt;saldo&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"saldoActual"</span>/&gt;&lt;/saldo&gt;</span>
+        <span class="tg">&lt;/titular&gt;</span>
+        <span class="tg">&lt;movimientos&gt;</span>
+          <span class="tg">&lt;xsl:for-each <span class="at">select</span>=<span class="st">"movimientos/movimiento"</span>&gt;</span>
+            <span class="tg">&lt;movimiento <span class="at">id</span>=<span class="st">"{@id}"</span>&gt;</span>
+              <span class="tg">&lt;fecha&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"fecha"</span>/&gt;&lt;/fecha&gt;</span>
+              <span class="tg">&lt;tipo&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"tipo"</span>/&gt;&lt;/tipo&gt;</span>
+              <span class="tg">&lt;concepto&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"concepto"</span>/&gt;&lt;/concepto&gt;</span>
+              <span class="tg">&lt;importe&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"importe"</span>/&gt;&lt;/importe&gt;</span>
+            <span class="tg">&lt;/movimiento&gt;</span>
+          <span class="tg">&lt;/xsl:for-each&gt;</span>
+        <span class="tg">&lt;/movimientos&gt;</span>
+      <span class="tg">&lt;/cuenta&gt;</span>
+    <span class="tg">&lt;/xsl:for-each&gt;</span>
+  <span class="tg">&lt;/cuentas&gt;</span>
+<span class="tg">&lt;/xsl:template&gt;</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Variante — Solo ingresos</div>
+      <div class="ex-title">Cuenta_bancaria_ingresos_transformacion.xsl — Filtrar por tipo</div>
+      <pre><span class="cm">&lt;!-- Cambio clave: predicado [tipo='ingreso'] :--&gt;</span>
+<span class="tg">&lt;xsl:for-each <span class="at">select</span>=<span class="st">"movimientos/movimiento[tipo='ingreso']"</span>&gt;</span>
+  <span class="tg">&lt;movimiento <span class="at">id</span>=<span class="st">"{@id}"</span>&gt;</span>
+    <span class="tg">&lt;fecha&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"fecha"</span>/&gt;&lt;/fecha&gt;</span>
+    <span class="tg">&lt;tipo&gt;</span>ingreso<span class="tg">&lt;/tipo&gt;</span>
+    <span class="tg">&lt;concepto&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"concepto"</span>/&gt;&lt;/concepto&gt;</span>
+    <span class="tg">&lt;importe&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"importe"</span>/&gt;&lt;/importe&gt;</span>
+  <span class="tg">&lt;/movimiento&gt;</span>
+<span class="tg">&lt;/xsl:for-each&gt;</span>
+
+<span class="cm">&lt;!-- Para gastos: [tipo='gasto'] :--&gt;</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Variante — Por fecha de apertura</div>
+      <div class="ex-title">Cuenta_bancaria_fecha_apertura_transformacion.xsl — Filtrar cuentas</div>
+      <pre><span class="cm">&lt;!-- Solo cuentas abiertas después de 2022-01-01 :--&gt;</span>
+<span class="tg">&lt;xsl:for-each <span class="at">select</span>=<span class="st">"banco/cuentas/cuenta[fechaApertura &gt; '2022-01-01']"</span>&gt;</span>
+  ...
+<span class="tg">&lt;/xsl:for-each&gt;</span></pre>
+      <div class="alert alert-warn">⚠️ El símbolo <code>&gt;</code> en XML se escapa como <code>&amp;gt;</code> o se usa directamente en los atributos de XSL.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Transformación Biblioteca</h2>
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio XSLT — Biblioteca</div>
+      <div class="ex-title">biblioteca_transformacion.xsl — Con choose para prestado SI/NO</div>
+      <pre><span class="tg">&lt;xsl:template <span class="at">match</span>=<span class="st">"/"</span>&gt;</span>
+  <span class="tg">&lt;catalogo&gt;</span>
+    <span class="tg">&lt;xsl:for-each <span class="at">select</span>=<span class="st">"biblioteca/libros/libro"</span>&gt;</span>
+      <span class="tg">&lt;item <span class="at">id</span>=<span class="st">"{@id}"</span>&gt;</span>
+        <span class="tg">&lt;obra&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"info_editorial/titulo"</span>/&gt;&lt;/obra&gt;</span>
+        <span class="tg">&lt;escritor&gt;&lt;xsl:value-of <span class="at">select</span>=<span class="st">"info_editorial/autor"</span>/&gt;&lt;/escritor&gt;</span>
+        <span class="tg">&lt;prestado&gt;</span>
+          <span class="tg">&lt;xsl:choose&gt;</span>
+            <span class="tg">&lt;xsl:when <span class="at">test</span>=<span class="st">"estado_prestamos/prestamo"</span>&gt;</span>SI<span class="tg">&lt;/xsl:when&gt;</span>
+            <span class="tg">&lt;xsl:otherwise&gt;</span>NO<span class="tg">&lt;/xsl:otherwise&gt;</span>
+          <span class="tg">&lt;/xsl:choose&gt;</span>
+        <span class="tg">&lt;/prestado&gt;</span>
+      <span class="tg">&lt;/item&gt;</span>
+    <span class="tg">&lt;/xsl:for-each&gt;</span>
+  <span class="tg">&lt;/catalogo&gt;</span>
+<span class="tg">&lt;/xsl:template&gt;</span></pre>
+      <p style="margin-top:0.5rem">Resultado (resultado_biblioteca.xml):</p>
+      <pre><span class="tg">&lt;catalogo&gt;</span>
+  <span class="tg">&lt;item <span class="at">id</span>=<span class="st">"L-9982"</span>&gt;</span>
+    <span class="tg">&lt;obra&gt;</span>La Sombra del Viento<span class="tg">&lt;/obra&gt;</span>
+    <span class="tg">&lt;escritor&gt;</span>Carlos Ruiz Zafón<span class="tg">&lt;/escritor&gt;</span>
+    <span class="tg">&lt;prestado&gt;</span>SI<span class="tg">&lt;/prestado&gt;</span>
+  <span class="tg">&lt;/item&gt;</span>
+  <span class="tg">&lt;item <span class="at">id</span>=<span class="st">"L-4410"</span>&gt;</span>
+    <span class="tg">&lt;obra&gt;</span>Sapiens: De animales a dioses<span class="tg">&lt;/obra&gt;</span>
+    <span class="tg">&lt;escritor&gt;</span>Yuval Noah Harari<span class="tg">&lt;/escritor&gt;</span>
+    <span class="tg">&lt;prestado&gt;</span>NO<span class="tg">&lt;/prestado&gt;</span>
+  <span class="tg">&lt;/item&gt;</span>
+<span class="tg">&lt;/catalogo&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<!-- ===== T6: EJ XQUERY ===== -->
+<div id="t6" class="section">
+  <div class="sec-title">📝 Ejercicios <span>XQuery</span> resueltos — Agenda de Alma</div>
+
+  <div class="card">
+    <h2>Los 10 ejercicios XQuery sobre la Agenda</h2>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 1</div>
+      <div class="ex-title">Listar nombre y apellidos de todas las personas (propietario + contactos)</div>
+      <pre><span class="tg">&lt;personas&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/propietario | /agenda/contactos/persona
+  <span class="kw">return</span>
+    <span class="tg">&lt;persona&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>{ <span class="vr">$p</span>/identificadores/nombre/<span class="fn">text</span>() }<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;apellidos&gt;</span>{ <span class="vr">$p</span>/identificadores/apellidos/<span class="fn">text</span>() }<span class="tg">&lt;/apellidos&gt;</span>
+    <span class="tg">&lt;/persona&gt;</span>
+}
+<span class="tg">&lt;/personas&gt;</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 2</div>
+      <div class="ex-title">Solo las personas que viven en Santander (con WHERE)</div>
+      <pre><span class="tg">&lt;personas-santander&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/contactos/persona[direccion/localidad = <span class="st">"Santander"</span>]
+  <span class="kw">return</span>
+    <span class="tg">&lt;persona <span class="at">id</span>=<span class="st">"{ $p/@id }"</span>&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>{ <span class="vr">$p</span>/identificadores/nombre/<span class="fn">text</span>() }<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;apellidos&gt;</span>{ <span class="vr">$p</span>/identificadores/apellidos/<span class="fn">text</span>() }<span class="tg">&lt;/apellidos&gt;</span>
+      <span class="tg">&lt;localidad&gt;</span>{ <span class="vr">$p</span>/direccion/localidad/<span class="fn">text</span>() }<span class="tg">&lt;/localidad&gt;</span>
+    <span class="tg">&lt;/persona&gt;</span>
+}
+<span class="tg">&lt;/personas-santander&gt;</span></pre>
+      <div class="alert alert-info">💡 El filtro puede ir en el predicado <code>[direccion/localidad = "Santander"]</code> o en una cláusula <code>where</code> separada — ambas formas son correctas.</div>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 3</div>
+      <div class="ex-title">Nombre completo y dirección concatenada (con LET y concat)</div>
+      <pre><span class="tg">&lt;listado&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/propietario | /agenda/contactos/persona
+  <span class="kw">return</span>
+    <span class="tg">&lt;persona&gt;</span>
+      <span class="tg">&lt;nombre-completo&gt;</span>
+        { <span class="fn">concat</span>(<span class="vr">$p</span>/identificadores/nombre, <span class="st">" "</span>, <span class="vr">$p</span>/identificadores/apellidos) }
+      <span class="tg">&lt;/nombre-completo&gt;</span>
+      <span class="tg">&lt;direccion&gt;</span>
+        { <span class="fn">concat</span>(<span class="vr">$p</span>/direccion/calle, <span class="st">", "</span>, <span class="vr">$p</span>/direccion/localidad,
+          <span class="st">", "</span>, <span class="vr">$p</span>/direccion/cp) }
+      <span class="tg">&lt;/direccion&gt;</span>
+    <span class="tg">&lt;/persona&gt;</span>
+}
+<span class="tg">&lt;/listado&gt;</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 4</div>
+      <div class="ex-title">Solo personas con teléfono de casa</div>
+      <pre><span class="tg">&lt;con-telefono-casa&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/contactos/persona[telefonos/casa]
+  <span class="kw">return</span>
+    <span class="tg">&lt;persona <span class="at">id</span>=<span class="st">"{ $p/@id }"</span>&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>{ <span class="vr">$p</span>/identificadores/nombre/<span class="fn">text</span>() }<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;casa&gt;</span>{ <span class="vr">$p</span>/telefonos/casa/<span class="fn">text</span>() }<span class="tg">&lt;/casa&gt;</span>
+    <span class="tg">&lt;/persona&gt;</span>
+}
+<span class="tg">&lt;/con-telefono-casa&gt;</span></pre>
+      <div class="ex-desc">Resultado: Roberto (p02) y Juan (p03), que son los que tienen teléfono de casa.</div>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 5</div>
+      <div class="ex-title">Contar cuántos contactos hay en total</div>
+      <pre><span class="tg">&lt;total-contactos&gt;</span>
+  { <span class="fn">count</span>(/agenda/contactos/persona) }
+<span class="tg">&lt;/total-contactos&gt;</span>
+
+<span class="cm">(: Resultado: &lt;total-contactos&gt;3&lt;/total-contactos&gt; :)</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 6</div>
+      <div class="ex-title">Contar cuántas personas viven en cada localidad (agrupar con distinct-values + LET)</div>
+      <pre><span class="tg">&lt;localidades&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$loc</span> <span class="kw">in</span> <span class="fn">distinct-values</span>(
+    (/agenda/propietario | /agenda/contactos/persona)/direccion/localidad)
+  <span class="kw">let</span> <span class="vr">$num</span> := <span class="fn">count</span>(
+    (/agenda/propietario | /agenda/contactos/persona)
+    [direccion/localidad = <span class="vr">$loc</span>])
+  <span class="kw">order by</span> <span class="vr">$loc</span>
+  <span class="kw">return</span>
+    <span class="tg">&lt;localidad <span class="at">nombre</span>=<span class="st">"{$loc}"</span>&gt;</span>
+      <span class="tg">&lt;habitantes&gt;</span>{ <span class="vr">$num</span> }<span class="tg">&lt;/habitantes&gt;</span>
+    <span class="tg">&lt;/localidad&gt;</span>
+}
+<span class="tg">&lt;/localidades&gt;</span>
+
+<span class="cm">(: Resultado:
+   &lt;localidad nombre="Santander"&gt;&lt;habitantes&gt;2&lt;/habitantes&gt;&lt;/localidad&gt;
+   &lt;localidad nombre="Torrelavega"&gt;&lt;habitantes&gt;2&lt;/habitantes&gt;&lt;/localidad&gt;
+:)</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 7</div>
+      <div class="ex-title">Mostrar cada persona con el número de teléfonos que tiene</div>
+      <pre><span class="tg">&lt;telefonos-por-persona&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/propietario | /agenda/contactos/persona
+  <span class="kw">return</span>
+    <span class="tg">&lt;persona&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>
+        { <span class="fn">concat</span>(<span class="vr">$p</span>/identificadores/nombre, <span class="st">" "</span>, <span class="vr">$p</span>/identificadores/apellidos) }
+      <span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;cantidad&gt;</span>{ <span class="fn">count</span>(<span class="vr">$p</span>/telefonos/*) }<span class="tg">&lt;/cantidad&gt;</span>
+    <span class="tg">&lt;/persona&gt;</span>
+}
+<span class="tg">&lt;/telefonos-por-persona&gt;</span>
+
+<span class="cm">(: Alma: 3 | Inés: 1 | Roberto: 2 | Juan: 3 :)</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 8</div>
+      <div class="ex-title">Ordenar contactos por apellidos (ORDER BY)</div>
+      <pre><span class="tg">&lt;ordenados&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/contactos/persona
+  <span class="kw">order by</span> <span class="vr">$p</span>/identificadores/apellidos
+  <span class="kw">return</span>
+    <span class="tg">&lt;persona&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>{ <span class="vr">$p</span>/identificadores/nombre/<span class="fn">text</span>() }<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;apellidos&gt;</span>{ <span class="vr">$p</span>/identificadores/apellidos/<span class="fn">text</span>() }<span class="tg">&lt;/apellidos&gt;</span>
+    <span class="tg">&lt;/persona&gt;</span>
+}
+<span class="tg">&lt;/ordenados&gt;</span>
+
+<span class="cm">(: Resultado: Gutiérrez Gómez → López Pérez → Sánchez Martínez :)</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 9</div>
+      <div class="ex-title">Crear XML estilo XSLT (nombre, apellidos, teléfonos y dirección)</div>
+      <pre><span class="tg">&lt;personas&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/propietario | /agenda/contactos/persona
+  <span class="kw">return</span>
+    <span class="tg">&lt;persona&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>{ <span class="vr">$p</span>/identificadores/nombre/<span class="fn">text</span>() }<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;apellidos&gt;</span>{ <span class="vr">$p</span>/identificadores/apellidos/<span class="fn">text</span>() }<span class="tg">&lt;/apellidos&gt;</span>
+      <span class="tg">&lt;telefonos&gt;</span>{ <span class="vr">$p</span>/telefonos/* }<span class="tg">&lt;/telefonos&gt;</span>
+      <span class="tg">&lt;direccion&gt;</span>
+        { <span class="fn">concat</span>(<span class="vr">$p</span>/direccion/calle, <span class="st">", "</span>, <span class="vr">$p</span>/direccion/localidad,
+          <span class="st">", "</span>, <span class="vr">$p</span>/direccion/cp) }
+      <span class="tg">&lt;/direccion&gt;</span>
+    <span class="tg">&lt;/persona&gt;</span>
+}
+<span class="tg">&lt;/personas&gt;</span></pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 10</div>
+      <div class="ex-title">Solo los móviles de todos los contactos</div>
+      <pre><span class="tg">&lt;moviles&gt;</span>
+{
+  <span class="kw">for</span> <span class="vr">$p</span> <span class="kw">in</span> /agenda/propietario | /agenda/contactos/persona
+  <span class="kw">return</span>
+    <span class="tg">&lt;contacto&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>
+        { <span class="fn">concat</span>(<span class="vr">$p</span>/identificadores/nombre, <span class="st">" "</span>, <span class="vr">$p</span>/identificadores/apellidos) }
+      <span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;movil&gt;</span>{ <span class="vr">$p</span>/telefonos/movil/<span class="fn">text</span>() }<span class="tg">&lt;/movil&gt;</span>
+    <span class="tg">&lt;/contacto&gt;</span>
+}
+<span class="tg">&lt;/moviles&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<!-- ===== T7: XQUERY UPDATE ===== -->
+<div id="t7" class="section">
+  <div class="sec-title">⚡ XQuery Update <span>— Solo Saxon EE</span></div>
+
+  <div class="alert alert-warn" style="margin-bottom:1rem">
+    ⚠️ INSERT, REPLACE, DELETE solo están disponibles en Saxon Enterprise Edition. Requiere licencia (evaluación gratuita 30 días en saxonica.com).
+  </div>
+
+  <div class="card">
+    <h2>Operaciones de Update disponibles</h2>
+    <table>
+      <tr><th>Operación</th><th>Sintaxis base</th></tr>
+      <tr><td><code>insert node</code></td><td><code>insert node &lt;nodo/&gt; into /ruta</code> | <code>as last into</code> | <code>after $nodo</code></td></tr>
+      <tr><td><code>replace value of node</code></td><td><code>replace value of node /ruta with "nuevo_valor"</code></td></tr>
+      <tr><td><code>delete node</code></td><td><code>delete node /ruta/elemento</code></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Academia de Baile — Ejercicios con Update</h2>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 3.1 — INSERT simple</div>
+      <div class="ex-title">Insertar un nuevo baile (Bachata) al final</div>
+      <pre>xquery version <span class="st">"3.1"</span>;
+<span class="kw">insert node</span>
+<span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"7"</span>&gt;</span>
+  <span class="tg">&lt;nombre&gt;</span>Bachata<span class="tg">&lt;/nombre&gt;</span>
+  <span class="tg">&lt;precio <span class="at">cuota</span>=<span class="st">"mensual"</span> <span class="at">moneda</span>=<span class="st">"euro"</span>&gt;</span>27<span class="tg">&lt;/precio&gt;</span>
+  <span class="tg">&lt;plazas&gt;</span>20<span class="tg">&lt;/plazas&gt;</span>
+  <span class="tg">&lt;comienzo&gt;</span>14/04/2026<span class="tg">&lt;/comienzo&gt;</span>
+  <span class="tg">&lt;fin&gt;</span>31/07/2026<span class="tg">&lt;/fin&gt;</span>
+  <span class="tg">&lt;profesor&gt;</span>Marcio Monteiro<span class="tg">&lt;/profesor&gt;</span>
+  <span class="tg">&lt;sala&gt;</span>2<span class="tg">&lt;/sala&gt;</span>
+<span class="tg">&lt;/baile&gt;</span>
+<span class="kw">as last into</span> /Bailes</pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 3.2 — REPLACE múltiple</div>
+      <div class="ex-title">Modificar fechas de Salsa y profesor de Merengue (múltiples operaciones entre paréntesis)</div>
+      <pre>xquery version <span class="st">"3.1"</span>;
+(
+  <span class="kw">replace value of node</span> /Bailes/baile[nombre=<span class="st">"Salsa"</span>]/comienzo <span class="kw">with</span> <span class="st">"1/1/2026"</span>,
+  <span class="kw">replace value of node</span> /Bailes/baile[nombre=<span class="st">"Salsa"</span>]/fin <span class="kw">with</span> <span class="st">"31/12/2026"</span>,
+  <span class="kw">replace value of node</span> /Bailes/baile[nombre=<span class="st">"Merengue"</span>]/profesor <span class="kw">with</span> <span class="st">"Gabriel Lopez"</span>
+)</pre>
+      <div class="alert alert-info">💡 Cuando hay varias operaciones, se agrupan entre paréntesis ( ) separadas por comas.</div>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 3.3 — INSERT + DELETE combinados</div>
+      <div class="ex-title">Insertar Tango nuevo y eliminar el Tango antiguo</div>
+      <pre>xquery version <span class="st">"3.1"</span>;
+(
+  <span class="kw">insert node</span>
+    <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"8"</span>&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>Tango<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;precio <span class="at">cuota</span>=<span class="st">"mensual"</span> <span class="at">moneda</span>=<span class="st">"euro"</span>&gt;</span>27<span class="tg">&lt;/precio&gt;</span>
+      <span class="tg">&lt;plazas&gt;</span>20<span class="tg">&lt;/plazas&gt;</span>
+      <span class="tg">&lt;comienzo&gt;</span>01/01/2026<span class="tg">&lt;/comienzo&gt;</span>
+      <span class="tg">&lt;fin&gt;</span>31/12/2026<span class="tg">&lt;/fin&gt;</span>
+      <span class="tg">&lt;profesor&gt;</span>Roberto Garcia<span class="tg">&lt;/profesor&gt;</span>
+      <span class="tg">&lt;sala&gt;</span>1<span class="tg">&lt;/sala&gt;</span>
+    <span class="tg">&lt;/baile&gt;</span>
+  <span class="kw">as last into</span> /Bailes,
+  <span class="kw">delete node</span> /Bailes/baile[nombre=<span class="st">"Tango"</span> <span class="kw">and</span> comienzo=<span class="st">"1/1/2011"</span>]
+)</pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 4.1 — INSERT condicional (if/exists)</div>
+      <div class="ex-title">Insertar Bachata Avanzada solo si no existe ya, posicionando con after</div>
+      <pre><span class="kw">let</span> <span class="vr">$doc</span> := <span class="fn">doc</span>(<span class="st">"Academia_Baile.xml"</span>)/Bailes
+<span class="kw">let</span> <span class="vr">$existe</span> := <span class="vr">$doc</span>/baile[nombre = <span class="st">"Bachata Avanzada"</span>]
+<span class="kw">return</span>
+  <span class="kw">if</span>(<span class="fn">exists</span>(<span class="vr">$existe</span>)) <span class="kw">then</span>
+    ()
+  <span class="kw">else</span>
+    <span class="kw">insert node</span>
+    <span class="tg">&lt;baile <span class="at">id</span>=<span class="st">"7"</span>&gt;</span>
+      <span class="tg">&lt;nombre&gt;</span>Bachata Avanzada<span class="tg">&lt;/nombre&gt;</span>
+      <span class="tg">&lt;precio <span class="at">cuota</span>=<span class="st">"mensual"</span> <span class="at">moneda</span>=<span class="st">"euro"</span>&gt;</span>36<span class="tg">&lt;/precio&gt;</span>
+      <span class="tg">&lt;plazas&gt;</span>14<span class="tg">&lt;/plazas&gt;</span>
+      <span class="tg">&lt;comienzo&gt;</span>15/2/2027<span class="tg">&lt;/comienzo&gt;</span>
+      <span class="tg">&lt;fin&gt;</span>15/12/2027<span class="tg">&lt;/fin&gt;</span>
+      <span class="tg">&lt;profesor&gt;</span>Laura Mendiola<span class="tg">&lt;/profesor&gt;</span>
+      <span class="tg">&lt;sala&gt;</span>2<span class="tg">&lt;/sala&gt;</span>
+    <span class="tg">&lt;/baile&gt;</span>
+    <span class="kw">after</span> <span class="vr">$doc</span>/baile[sala = <span class="nm">2</span>][<span class="fn">last</span>()]</pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 4.2 — REPLACE con cálculo y condición multiple</div>
+      <div class="ex-title">Aplicar descuento a los bailes de Miriam Gutierrez según tipo de cuota, renombrar, ampliar plazas</div>
+      <pre><span class="kw">for</span> <span class="vr">$b</span> <span class="kw">in</span> <span class="fn">doc</span>(<span class="st">"Academia_Baile.xml"</span>)/Bailes/baile[profesor = <span class="st">"Miriam Gutierrez"</span>]
+<span class="kw">return</span> (
+  <span class="kw">if</span> (<span class="vr">$b</span>/precio/@cuota = <span class="st">"trimestral"</span>)
+  <span class="kw">then replace value of node</span> <span class="vr">$b</span>/precio
+    <span class="kw">with</span> <span class="fn">string</span>(xs:decimal(<span class="fn">normalize-space</span>(<span class="vr">$b</span>/precio)) * 0.90)  <span class="cm">(: -10% :)</span>
+  <span class="kw">else if</span> (<span class="vr">$b</span>/precio/@cuota = <span class="st">"anual"</span>)
+  <span class="kw">then replace value of node</span> <span class="vr">$b</span>/precio
+    <span class="kw">with</span> <span class="fn">string</span>(xs:decimal(<span class="fn">normalize-space</span>(<span class="vr">$b</span>/precio)) * 0.85)  <span class="cm">(: -15% :)</span>
+  <span class="kw">else</span> (),
+  <span class="kw">replace value of node</span> <span class="vr">$b</span>/profesor <span class="kw">with</span> <span class="st">"Miriam Gutierrez (Coordinadora)"</span>,
+  <span class="kw">if</span> (xs:integer(<span class="fn">normalize-space</span>(<span class="vr">$b</span>/plazas)) <span class="kw">lt</span> <span class="nm">10</span>)
+  <span class="kw">then replace value of node</span> <span class="vr">$b</span>/plazas <span class="kw">with</span> (<span class="vr">$b</span>/plazas + <span class="nm">2</span>)
+  <span class="kw">else</span> ()
+)</pre>
+    </div>
+
+    <div class="ex-block">
+      <div class="ex-num">Ejercicio 4.3 — DELETE con múltiples condiciones</div>
+      <div class="ex-title">Eliminar bailes de sala 1 con fin 22/6/2011 y precio ≥ 30 o cuota trimestral</div>
+      <pre><span class="kw">for</span> <span class="vr">$b</span> <span class="kw">in</span> <span class="fn">doc</span>(<span class="st">"Academia_Baile.xml"</span>)/Bailes/baile
+<span class="kw">where</span> <span class="vr">$b</span>/sala = <span class="nm">1</span>
+    <span class="kw">and</span> <span class="vr">$b</span>/fin = <span class="st">"22/6/2011"</span>
+    <span class="kw">and</span> (xs:decimal(<span class="vr">$b</span>/precio) &gt;= <span class="nm">30</span> <span class="kw">or</span> <span class="vr">$b</span>/precio/@cuota = <span class="st">"trimestral"</span>)
+<span class="kw">return delete node</span> <span class="vr">$b</span></pre>
+    </div>
+  </div>
+</div>
+
+<!-- ===== T8: SAXON ===== -->
+<div id="t8" class="section">
+  <div class="sec-title">🖥 <span>Saxon</span> — Instalación y Comandos</div>
+
+  <div class="alert alert-info" style="margin-bottom:1rem">
+    💡 Necesitas tener Java instalado: <code>https://www.oracle.com/java/technologies/downloads/#jdk25-windows</code>
+  </div>
+
+  <div class="card">
+    <h2>Comandos Saxon</h2>
+    <table>
+      <tr><th>Operación</th><th>Comando</th></tr>
+      <tr>
+        <td>Transformación XSLT</td>
+        <td><code>java -jar saxon-he-12.9.jar -s:entrada.xml -xsl:transformacion.xsl -o:resultado.xml</code></td>
+      </tr>
+      <tr>
+        <td>Consulta XQuery</td>
+        <td><code>java -cp saxon-he-12.9.jar net.sf.saxon.Query -s:agenda.xml consulta.xq &gt;resultado.xml</code></td>
+      </tr>
+      <tr>
+        <td>XQuery Update (EE)</td>
+        <td><code>java -cp saxon-ee-12.9.jar net.sf.saxon.Query -update:on -s:Academia_Baile.xml -q:ejercicio.xq</code></td>
+      </tr>
+    </table>
+    <h3>Flags más importantes</h3>
+    <table>
+      <tr><th>Flag</th><th>Significado</th></tr>
+      <tr><td><code>-s:</code></td><td>Source — fichero XML de entrada</td></tr>
+      <tr><td><code>-xsl:</code></td><td>Fichero XSL de transformación</td></tr>
+      <tr><td><code>-o:</code></td><td>Output — fichero de salida</td></tr>
+      <tr><td><code>-q:</code></td><td>Query — fichero .xq de consulta</td></tr>
+      <tr><td><code>-update:on</code></td><td>Activar modo update (solo EE)</td></tr>
+      <tr><td><code>-cp</code></td><td>Classpath Java (para XQuery)</td></tr>
+    </table>
+    <h3>Diferencias HE vs EE</h3>
+    <table>
+      <tr><th>Saxon HE (gratis)</th><th>Saxon EE (licencia)</th></tr>
+      <tr><td>XSLT 2.0/3.0</td><td>XSLT 2.0/3.0 + optimizaciones</td></tr>
+      <tr><td>XQuery básico</td><td>XQuery + Update (INSERT/REPLACE/DELETE)</td></tr>
+      <tr><td>Libre uso</td><td>Evaluación 30 días en saxonica.com</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== T9: SIMULACRO ===== -->
+<div id="t9" class="section">
+  <div class="sec-title">🎓 <span>Simulacro de Examen</span> — Respuestas incluidas</div>
+
+  <!-- TEST TEÓRICO -->
+  <div class="card">
+    <h2>PARTE 1 — Test teórico (10 preguntas)</h2>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 1</div>
+      <div class="qtext">¿Qué hace la expresión XPath <code>//persona[@id="p02"]/*/*</code>?</div>
+      <ul class="options">
+        <li class="correct">✓ a) Selecciona todos los nietos del elemento persona con id "p02"</li>
+        <li class="wrong">b) Selecciona todos los hijos del elemento persona con id "p02"</li>
+        <li class="wrong">c) Selecciona el atributo id del elemento persona</li>
+        <li class="wrong">d) Selecciona todos los persona que tienen hijos</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 <code>[@id="p02"]</code> filtra por atributo. El primer <code>*</code> selecciona todos los hijos directos (identificadores, direccion, telefonos...) y el segundo <code>*</code> los hijos de esos (nombre, apellidos, calle, movil...) — es decir, los nietos.</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 2</div>
+      <div class="qtext">¿Cuál es la diferencia entre <code>xsl:copy-of</code> y <code>xsl:value-of</code>?</div>
+      <ul class="options">
+        <li class="wrong">a) No hay diferencia, hacen lo mismo</li>
+        <li class="correct">✓ b) copy-of copia el nodo completo con etiquetas e hijos; value-of solo extrae el texto</li>
+        <li class="wrong">c) value-of copia el nodo completo; copy-of solo el texto</li>
+        <li class="wrong">d) copy-of solo funciona con atributos</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 <code>&lt;xsl:copy-of select="telefonos"/&gt;</code> genera: <code>&lt;telefonos&gt;&lt;movil&gt;970123123&lt;/movil&gt;&lt;/telefonos&gt;</code>. <code>&lt;xsl:value-of select="telefonos/movil"/&gt;</code> genera solo: <code>970123123</code></div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 3</div>
+      <div class="qtext">En XQuery, ¿qué hace <code>distinct-values(//localidad)</code>?</div>
+      <ul class="options">
+        <li class="wrong">a) Cuenta las localidades únicas</li>
+        <li class="correct">✓ b) Devuelve una secuencia con las localidades sin duplicados</li>
+        <li class="wrong">c) Ordena las localidades alfabéticamente</li>
+        <li class="wrong">d) Elimina los nodos localidad del XML</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 Es esencial para agrupar. Ejemplo: si hay 2 personas en Santander y 2 en Torrelavega, <code>distinct-values()</code> devuelve ["Santander", "Torrelavega"], que luego usamos para contar con <code>count()</code> en el <code>let</code>.</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 4</div>
+      <div class="qtext">¿Qué instrucción XSLT permite hacer una condición tipo if/else?</div>
+      <ul class="options">
+        <li class="wrong">a) <code>xsl:if</code></li>
+        <li class="correct">✓ b) <code>xsl:choose</code> con <code>xsl:when</code> y <code>xsl:otherwise</code></li>
+        <li class="wrong">c) <code>xsl:select</code></li>
+        <li class="wrong">d) <code>xsl:when</code> solo</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 <code>xsl:if</code> no tiene "else". Para múltiples condiciones se usa <code>xsl:choose / xsl:when / xsl:otherwise</code>. Es lo que usamos en la biblioteca para mostrar "SI" o "NO" en el campo &lt;prestado&gt;.</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 5</div>
+      <div class="qtext">¿Qué representa <code>{@id}</code> en una etiqueta de salida XSLT como <code>&lt;cuenta id="{@id}"&gt;</code>?</div>
+      <ul class="options">
+        <li class="wrong">a) Un comentario XML</li>
+        <li class="wrong">b) Una variable XSLT predefinida</li>
+        <li class="correct">✓ c) Un AVT (Attribute Value Template) que inserta el valor del atributo id dinámicamente</li>
+        <li class="wrong">d) Un error de sintaxis</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 Los AVT permiten usar expresiones XPath dentro de atributos usando llaves {}. Sin las llaves, <code>id="@id"</code> pondría literalmente el texto "@id". Con llaves <code>id="{@id}"</code> pone el valor real, p.ej. "ACC-001".</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 6</div>
+      <div class="qtext">¿Cuál es la expresión XPath para obtener el id de todas las personas que tienen teléfono móvil?</div>
+      <ul class="options">
+        <li class="wrong">a) <code>//persona/telefonos/movil</code></li>
+        <li class="wrong">b) <code>//persona[@movil]/@id</code></li>
+        <li class="correct">✓ c) <code>//persona[telefonos/movil]/@id</code></li>
+        <li class="wrong">d) <code>//persona/movil/../@id</code></li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 El predicado <code>[telefonos/movil]</code> filtra solo las personas que TIENEN el elemento movil. Luego <code>/@id</code> extrae el atributo id de esas personas.</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 7</div>
+      <div class="qtext">En XQuery, ¿qué operaciones de Update SOLO están disponibles en Saxon Enterprise Edition?</div>
+      <ul class="options">
+        <li class="wrong">a) FOR, LET, RETURN</li>
+        <li class="correct">✓ b) INSERT, REPLACE, DELETE</li>
+        <li class="wrong">c) WHERE, ORDER BY</li>
+        <li class="wrong">d) count(), sum(), concat()</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 Las operaciones de modificación de documentos XML (XQuery Update Facility) requieren Saxon EE. Saxon HE solo permite consultas de lectura. Comando: <code>java -cp saxon-ee-12.9.jar net.sf.saxon.Query -update:on -s:fichero.xml -q:consulta.xq</code></div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 8</div>
+      <div class="qtext">¿Qué devuelve <code>//contactos/persona/telefonos/casa/../../@id</code>?</div>
+      <ul class="options">
+        <li class="wrong">a) El id de los elementos casa</li>
+        <li class="wrong">b) Los teléfonos de casa de todos los contactos</li>
+        <li class="correct">✓ c) El id de las personas que tienen teléfono de casa</li>
+        <li class="wrong">d) Los datos del elemento telefonos</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 La ruta baja hasta <code>casa</code>, luego <code>../..</code> sube dos niveles: primero a <code>telefonos</code>, luego a <code>persona</code>. Finalmente <code>@id</code> obtiene el atributo id de persona. Es un patrón muy típico en examen.</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 9</div>
+      <div class="qtext">¿Cuál es la estructura correcta FLOWR en XQuery?</div>
+      <ul class="options">
+        <li class="wrong">a) FOR → WHERE → LET → ORDER → RETURN</li>
+        <li class="wrong">b) FOR → RETURN → WHERE → ORDER → LET</li>
+        <li class="correct">✓ c) FOR → LET → ORDER BY → WHERE → RETURN (F-L-O-W-R)</li>
+        <li class="wrong">d) WHERE → FOR → LET → RETURN → ORDER</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 FLOWR: <b>F</b>or → <b>L</b>et → <b>O</b>rder by → <b>W</b>here → <b>R</b>eturn. Solo FOR y RETURN son obligatorios. LET, ORDER BY y WHERE son opcionales.</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Pregunta 10</div>
+      <div class="qtext">¿Qué hace <code>&lt;xsl:apply-templates select="agenda/contactos/persona"/&gt;</code> diferente de <code>&lt;xsl:for-each select="agenda/contactos/persona"&gt;</code>?</div>
+      <ul class="options">
+        <li class="wrong">a) No hay diferencia</li>
+        <li class="correct">✓ b) apply-templates delega el procesamiento a una plantilla <code>match="persona"</code> definida por separado; for-each procesa inline</li>
+        <li class="wrong">c) for-each solo funciona con un elemento a la vez</li>
+        <li class="wrong">d) apply-templates no acepta XPath</li>
+      </ul>
+      <div class="ans-txt" style="display:block;color:var(--green)">📌 <code>apply-templates</code> busca una plantilla con <code>match="persona"</code> y la aplica a cada nodo. Permite mejor organización del código. <code>for-each</code> lo hace todo inline en el mismo template.</div>
+    </div>
+  </div>
+
+  <!-- EJERCICIOS PRÁCTICOS -->
+  <div class="card">
+    <h2>PARTE 2 — Ejercicios prácticos (4 ejercicios)</h2>
+
+    <div class="exam-q">
+      <div class="qnum">Ejercicio Práctico 1 — XPath (2 puntos)</div>
+      <div class="qtext">Dado el XML de la Agenda de Alma, escribe las expresiones XPath para:<br>
+      a) Obtener los identificadores (@id) de todos los contactos que tienen teléfono de trabajo<br>
+      b) Nombre completo del propietario usando concat()<br>
+      c) Todas las localidades de los contactos (sin duplicados no es posible en XPath puro, solo lista)
+      </div>
+      <div class="ans-box" style="display:block">
+<span class="cm">(: a) Contactos con teléfono de trabajo :)</span>
+//contactos/persona[telefonos/trabajo]/@id
+<span class="cm">(: Resultado: id="p03" — solo Juan tiene trabajo :)</span>
+
+<span class="cm">(: b) Nombre completo propietario :)</span>
+concat(/agenda/propietario/identificadores/nombre, " ",
+       /agenda/propietario/identificadores/apellidos)
+<span class="cm">(: Resultado: "Alma López Terán" :)</span>
+
+<span class="cm">(: c) Localidades de contactos :)</span>
+//contactos/persona/direccion/localidad
+<span class="cm">(: Resultado: Santander, Santander, Torrelavega :)</span></div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Ejercicio Práctico 2 — XSLT (3 puntos)</div>
+      <div class="qtext">Crea un fichero XSL que transforme el XML de la Agenda a HTML con una tabla que muestre: ID del contacto, nombre completo (concat), localidad y si tiene móvil (SI/NO). Usa <code>xsl:apply-templates</code> y <code>xsl:choose</code>.</div>
+      <div class="ans-box" style="display:block">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+  &lt;xsl:output method="html" indent="yes"
+    omit-xml-declaration="yes"/&gt;
+
+  &lt;xsl:template match="/"&gt;
+    &lt;html&gt;&lt;body&gt;
+      &lt;h1&gt;Agenda&lt;/h1&gt;
+      &lt;table border="1"&gt;
+        &lt;thead&gt;&lt;tr&gt;
+          &lt;th&gt;ID&lt;/th&gt;
+          &lt;th&gt;Nombre Completo&lt;/th&gt;
+          &lt;th&gt;Localidad&lt;/th&gt;
+          &lt;th&gt;Tiene Móvil&lt;/th&gt;
+        &lt;/tr&gt;&lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;xsl:apply-templates
+            select="agenda/contactos/persona"/&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/body&gt;&lt;/html&gt;
+  &lt;/xsl:template&gt;
+
+  &lt;xsl:template match="persona"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;xsl:value-of select="@id"/&gt;&lt;/td&gt;
+      &lt;td&gt;
+        &lt;xsl:value-of select="concat(
+          identificadores/nombre, ' ',
+          identificadores/apellidos)"/&gt;
+      &lt;/td&gt;
+      &lt;td&gt;&lt;xsl:value-of
+        select="direccion/localidad"/&gt;&lt;/td&gt;
+      &lt;td&gt;
+        &lt;xsl:choose&gt;
+          &lt;xsl:when test="telefonos/movil"&gt;SÍ&lt;/xsl:when&gt;
+          &lt;xsl:otherwise&gt;NO&lt;/xsl:otherwise&gt;
+        &lt;/xsl:choose&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Ejercicio Práctico 3 — XQuery (3 puntos)</div>
+      <div class="qtext">Usando el XML de la Agenda de Alma, escribe una consulta XQuery que:<br>
+      — Muestre cada persona con su nombre completo, número de teléfonos y si vive en Santander o no<br>
+      — Ordénalo por apellidos<br>
+      — El elemento raíz debe llamarse <code>&lt;informe&gt;</code>
+      </div>
+      <div class="ans-box" style="display:block">
+&lt;informe&gt;
+{
+  for $p in /agenda/propietario | /agenda/contactos/persona
+  order by $p/identificadores/apellidos
+  return
+    &lt;persona&gt;
+      &lt;nombre-completo&gt;
+        { concat($p/identificadores/nombre, " ",
+                 $p/identificadores/apellidos) }
+      &lt;/nombre-completo&gt;
+      &lt;num-telefonos&gt;
+        { count($p/telefonos/*) }
+      &lt;/num-telefonos&gt;
+      &lt;en-santander&gt;
+        {
+          if ($p/direccion/localidad = "Santander")
+          then "SÍ"
+          else "NO"
+        }
+      &lt;/en-santander&gt;
+    &lt;/persona&gt;
+}
+&lt;/informe&gt;</div>
+    </div>
+
+    <div class="exam-q">
+      <div class="qnum">Ejercicio Práctico 4 — XQuery Update Saxon EE (2 puntos)</div>
+      <div class="qtext">Sobre el fichero Academia_Baile.xml:<br>
+      a) Inserta un nuevo baile llamado "Flamenco" con precio 45€ mensual, 12 plazas, sala 1, profesor "Carmen Flores", comienzo 1/9/2026, fin 30/6/2027<br>
+      b) Cambia el precio de todos los bailes de cuota mensual a 30€
+      </div>
+      <div class="ans-box" style="display:block">
+<span class="cm">(: a) Insertar Flamenco :)</span>
+xquery version "3.1";
+insert node
+  &lt;baile id="9"&gt;
+    &lt;nombre&gt;Flamenco&lt;/nombre&gt;
+    &lt;precio cuota="mensual" moneda="euro"&gt;45&lt;/precio&gt;
+    &lt;plazas&gt;12&lt;/plazas&gt;
+    &lt;comienzo&gt;1/9/2026&lt;/comienzo&gt;
+    &lt;fin&gt;30/6/2027&lt;/fin&gt;
+    &lt;profesor&gt;Carmen Flores&lt;/profesor&gt;
+    &lt;sala&gt;1&lt;/sala&gt;
+  &lt;/baile&gt;
+as last into /Bailes
+
+<span class="cm">(: b) Cambiar precio bailes mensuales :)</span>
+xquery version "3.1";
+for $b in /Bailes/baile[precio/@cuota = "mensual"]
+return
+  replace value of node $b/precio with "30"</div>
+    </div>
+  </div>
+
+  <!-- RESUMEN RÁPIDO -->
+  <div class="card">
+    <h2>🧠 Tarjeta de repaso rápido — Errores típicos de examen</h2>
+    <table>
+      <tr><th>Error común</th><th>Correcto</th></tr>
+      <tr><td>Usar <code>></code> directamente en predicado XML</td><td>Usar <code>&amp;gt;</code> o en atributo de XSL se puede usar <code>&gt;</code></td></tr>
+      <tr><td>Olvidar las llaves {} en atributos XSLT: <code>id="@id"</code></td><td><code>id="{@id}"</code> — necesita llaves para AVT</td></tr>
+      <tr><td>Confundir <code>//</code> (any level) con <code>/</code> (root)</td><td><code>//persona</code> vs <code>/agenda/contactos/persona</code></td></tr>
+      <tr><td>En XQuery, no poner las llaves {} dentro de etiquetas</td><td><code>&lt;nombre&gt;{ $p/nombre }&lt;/nombre&gt;</code> — las {} son obligatorias</td></tr>
+      <tr><td>Usar UPDATE en Saxon HE</td><td>INSERT/REPLACE/DELETE solo en Saxon EE con <code>-update:on</code></td></tr>
+      <tr><td>Mezclar <code>xsl:if</code> con else</td><td><code>xsl:if</code> no tiene else; usar <code>xsl:choose/when/otherwise</code></td></tr>
+      <tr><td>Olvidar el | para propietario + contactos</td><td><code>/agenda/propietario | /agenda/contactos/persona</code></td></tr>
+      <tr><td>Múltiples updates sin paréntesis</td><td>Envolver con <code>( op1, op2, op3 )</code></td></tr>
+    </table>
+  </div>
+</div>
+
+</main>
+
+<script>
+function tab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
